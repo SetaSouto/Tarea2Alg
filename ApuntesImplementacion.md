@@ -15,3 +15,5 @@ De esta forma un padre cuando quiere agregar un hijo debe crear la conexión ent
 Agregamos una hoja, que implementa la clase INode (en conjunto con Node) para que las edges tengan INodes (hojas y nodos).  
 
 En vista de que una hoja no puede ser padre, diremos que un Edge solo tiene de INode al hijo.  
+
+Avancé más. Hasta ahora tenemos que las edges pueden hacer `split`, que es necesario cuando estamos recorriendo el camino de $\beta$ y se termina el string a mitad del arco, en ese momento se debe crear un nodo y todo el show. Para eso sirve el split, que separa el edge rápidamente y me devuelve el nuevo nodo que se debe crear, entonces el algoritmo lo único que debería hacer es agregar una hoja al nuevo nodo con el valor de $j$ no más.  
