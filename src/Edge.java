@@ -27,4 +27,15 @@ public class Edge {
         return this.tag;
     }
 
+    /**
+     * Adds a character at the end of the tag.
+     * @param c
+     */
+    public void addChar(String c) {
+        if (c.length() > 1) {
+            throw new Error("String is not only one character.");
+        }
+        this.tag += c;
+    }
+
 }
