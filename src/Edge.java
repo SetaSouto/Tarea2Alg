@@ -4,18 +4,15 @@
  */
 public class Edge {
     private String tag;
-    private Node father;
     private INode child;
 
     /**
      * Constructor.
      * @param tag tag of the edge.
-     * @param father father node.
      * @param child child node.
      */
-    public Edge (String tag, Node father, INode child) {
+    public Edge (String tag, INode child) {
         this.tag = tag;
-        this.father = father;
         this.child = child;
     }
 
@@ -47,12 +44,12 @@ public class Edge {
      */
     public Node splitEdge(String prefix) {
         if (this.tag.startsWith(prefix)) {
-            Node node = new Node();
             String newTag = this.tag.substring(prefix.length());
-            Edge newEdge = new Edge(newTag, node, this.child);
-            node.addEdge(newEdge);
+            Edge newEdge = new Edge(newTag, this.child);
             // Now, modify this Edge:
             this.tag = prefix;
+            Node node = new Node();
+            node.addEdge(newEdge);
             this.child = node;
             return node;
         } else {

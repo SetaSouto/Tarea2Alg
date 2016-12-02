@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  */
 class EdgeTest {
-    Edge edge = new Edge("a", new Node(), new Leaf(1));
+    Edge edge = new Edge("a", new Leaf(1));
     @Test
     void getTag() {
         assertEquals("a", edge.getTag());
@@ -25,7 +25,7 @@ class EdgeTest {
 
     @Test
     void splitEdge() {
-        Edge edge = new Edge("BANANA", new Node(), new Leaf(10));
+        Edge edge = new Edge("BANANA", new Leaf(10));
         Node innerNode = edge.splitEdge("BAN");
         assertEquals("BAN", edge.getTag());
         List<Edge> edges = innerNode.getEdges();
