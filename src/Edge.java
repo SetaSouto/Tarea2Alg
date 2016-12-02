@@ -5,7 +5,7 @@
 public class Edge {
     private String tag;
     private Node father;
-    private Node child;
+    private INode child;
 
     /**
      * Constructor.
@@ -13,7 +13,7 @@ public class Edge {
      * @param father father node.
      * @param child child node.
      */
-    public Edge (String tag, Node father, Node child) {
+    public Edge (String tag, Node father, INode child) {
         this.tag = tag;
         this.father = father;
         this.child = child;

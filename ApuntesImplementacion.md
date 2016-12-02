@@ -11,3 +11,7 @@ Mejor diremos que el nodo tiene una collection de aristas, de esta forma definim
 Obviamente una arista sabe qué nodos conecta. Por lo tanto debe tener un Nodo padre y un nodo hijo.  
 
 De esta forma un padre cuando quiere agregar un hijo debe crear la conexión entre él y su hijo para así ponerle una etiqueta a esa conexión.  
+
+Agregamos una hoja, que implementa la clase INode (en conjunto con Node) para que las edges tengan INodes (hojas y nodos).  
+
+En vista de que una hoja no puede ser padre, diremos que un Edge solo tiene de INode al hijo.  
