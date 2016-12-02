@@ -38,4 +38,26 @@ public class Edge {
         this.tag += c;
     }
 
+    /**
+     * Indicated the prefix of the tag to keep, splitEdge does a split of the edge, keeping prefix
+     * as the tag, created a new Node that is connected with the former child. The Edge connecting
+     * the new Node with the former Child has as tag the current tag without the prefix.
+     * @param prefix prefix to keep of the tag.
+     * @return the Node created during the split.
+     */
+    public Node splitEdge(String prefix) {
+        if (this.tag.startsWith(prefix)) {
+            Node node = new Node();
+            String newTag = this.tag.substring(prefix.length());
+            Edge newEdge = new Edge(newTag, node, this.child);
+            node.addEdge(newEdge);
+            // Now, modify this Edge:
+            this.tag = prefix;
+            this.child = node;
+            return node;
+        } else {
+            throw new Error("String 'prefix' isn't a prefix of tag. Given: " + prefix + ", Tag: " + this.tag);
+        }
+    }
+
 }

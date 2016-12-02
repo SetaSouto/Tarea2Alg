@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -19,6 +21,17 @@ class EdgeTest {
         assertEquals("ab", edge.getTag());
         edge.addChar("c");
         assertEquals("abc", edge.getTag());
+    }
+
+    @Test
+    void splitEdge() {
+        Edge edge = new Edge("BANANA", new Node(), new Leaf(10));
+        Node innerNode = edge.splitEdge("BAN");
+        assertEquals("BAN", edge.getTag());
+        List<Edge> edges = innerNode.getEdges();
+        // The innerNode has only one Edge:
+        Edge newEdge = edges.get(0);
+        assertEquals("ANA", newEdge.getTag());
     }
 
 }
