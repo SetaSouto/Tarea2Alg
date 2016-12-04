@@ -15,4 +15,5 @@ public class Leaf implements INode {
     public int getValue() {
         return this.value;
     }
+
 }
