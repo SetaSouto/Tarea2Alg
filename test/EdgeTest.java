@@ -24,6 +24,11 @@ class EdgeTest {
         assertEquals(11, this.edge.getTagIndex()[1]);
     }
 
+    @Test
+    void getLength() {
+        // This edge has as tag S[5..10], so it has 6 characters.
+        assertEquals(6, this.edge.getLength());
+    }
 
     @Test
     void splitEdge() {

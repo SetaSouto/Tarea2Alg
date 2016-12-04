@@ -28,6 +28,14 @@ public class Edge {
     }
 
     /**
+     * Returns the length of this edge's tag.
+     * @return the tag's length.
+     */
+    public int getLength() {
+        return this.tag[1] - this.tag[0] + 1;
+    }
+
+    /**
      * Adds a character at the end of the tag. Its only need the index of the character in the
      * real string S. If you want to add the character S[k] you give the int k.
      *
