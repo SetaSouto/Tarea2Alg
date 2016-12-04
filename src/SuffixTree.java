@@ -4,7 +4,8 @@
 public class SuffixTree {
     private Node root;
     private String str;
-    private Node lastVisited;
+    private Node lastNode;      // Last Node visited.
+    private Edge lastEdge;      // Last Edge visited.
 
     /**
      * Constructor. Receives a string and creates its suffix tree.
@@ -20,7 +21,8 @@ public class SuffixTree {
      */
     private void makeTree() {
         int jL = 0;
-        this.lastVisited = root;
+        this.lastNode = root;
+        this.lastEdge = null;
         for (int i = 0; i < str.length() - 1; i++) {
             // Phase i
             for (int j = jL; j < i + 1; i++) {
@@ -45,6 +47,18 @@ public class SuffixTree {
      * @return the number of the rule used.
      */
     public int extend(int j, int i) {
-        return 0;
+        if (j==0 && i==0) {
+            // First leaf:
+            Edge edge = new Edge(0, 0, new Leaf(j));
+            this.root.addEdge(edge);
+            this.lastEdge = edge;
+            this.lastNode = this.root;
+            return 2;
+        } else {
+            Node v = this.lastNode;
+
+
+            return 0;
+        }
     }
 }

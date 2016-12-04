@@ -22,3 +22,8 @@ Actualización domingo 4/12:
 No había leído todo el enunciado y había puesto como tag de los arcos strings, siendo que se manejan simplemente los índices de los caracteres inicial y final del tag en el string verdadero. Se cambió eso y eso modificó los otros métodos.  
 
 Se agregaron algunos métodos más como getLength() que permite saber el largo del tag del arco para ver si lo podemos saltar de una o no.  
+
+Comenzamos con la creación de la clase del árbol que implementará los algoritmos.  
+Cuando se crea el árbol se le pasa el string y se llama a la creación al tiro.  
+Dentro de la creación del árbol se separa la extensión de la fase, es decir, hay un método que se llama `extend(j, i)`, que hace la extensión $j$ de la fase $i$.  
+Llegué hasta acá no más, Work In Progress (WIP).  
