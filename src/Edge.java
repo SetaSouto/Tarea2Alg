@@ -34,7 +34,11 @@ public class Edge {
      * @param c index representing the character added to the tag.
      */
     public void addCharIndex(int c) {
-        this.tag[1] = c;
+        if (c == this.tag[1] + 1) {
+            this.tag[1] = c;
+        } else {
+            throw new Error("You must add a character that is after the last character of the current tag");
+        }
     }
 
     /**
