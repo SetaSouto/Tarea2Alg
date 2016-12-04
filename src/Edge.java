@@ -29,10 +29,20 @@ public class Edge {
 
     /**
      * Returns the length of this edge's tag.
+     *
      * @return the tag's length.
      */
     public int getLength() {
         return this.tag[1] - this.tag[0] + 1;
+    }
+
+    /**
+     * Returns the INode that is indicated by this Edge.
+     *
+     * @return INode indicated by this Edge.
+     */
+    public INode getChild() {
+        return this.child;
     }
 
     /**

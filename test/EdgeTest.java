@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * Created by souto on 01-12-2016.
  */
 class EdgeTest {
-    Edge edge = new Edge(5, 10, new Leaf(1));
+    Leaf leaf = new Leaf(1);
+    Edge edge = new Edge(5, 10, leaf);
 
     @Test
     void getTagIndex() {
@@ -28,6 +29,11 @@ class EdgeTest {
     void getLength() {
         // This edge has as tag S[5..10], so it has 6 characters.
         assertEquals(6, this.edge.getLength());
+    }
+
+    @Test
+    void getChild() {
+        assertEquals(leaf, this.edge.getChild());
     }
 
     @Test
