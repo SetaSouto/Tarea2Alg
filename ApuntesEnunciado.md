@@ -36,3 +36,9 @@ En ese caso por ejemplo el nodo ANA apunta a NA pues es un nodo que tiene su mis
 El NA apunta al A pues solo le falta la N y obviamente el A apunta a la raíz que no tiene string pues si quitamos el primer caracter nos quedamos sin string.  
 
 La gracia ahora es que si estamos en la extensión $i+1$, en la fase $j$ y agregamos un nodo $v$ que tiene el string $xa$ entonces en el siguiente paso tenemos que agregar el string $a$. O sea, el nodo ya existe o lo crearemos en el siguiente paso. Solo debemos recordar el nodo que creamos en el paso anterior.  
+
+*Todos los nodos tienen un suffix link*.  
+
+Ahora veamos cómo usar estos suffix links.  
+
+Primero, debemos mantener un puntero a la hoja del string más largo actual, es decir a la hoja donde termina el string $S[1..i]$.  
