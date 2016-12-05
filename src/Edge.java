@@ -46,6 +46,20 @@ public class Edge {
     }
 
     /**
+     * Extends the suffix tree recursively with the character S[i+1].
+     * @param i         the phase index. Indicates that the tree will be extended with S[i+1].
+     * @param current   the current substring index. Used to determine paths along the tree.
+     * @param str       the suffix tree string.
+     * @return          the extension rule used. Either 1, 2 or 3.
+     */
+    public int extend (int i, int current, String str) {
+        // Check matches character by character.
+        for (int k = tag[0]; k <= tag[1]; k++) {
+
+        }
+    }
+
+    /**
      * Adds a character at the end of the tag. Its only need the index of the character in the
      * real string S. If you want to add the character S[k] you give the int k.
      *

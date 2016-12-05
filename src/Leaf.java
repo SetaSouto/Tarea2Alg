@@ -14,7 +14,7 @@ public class Leaf implements INode {
     }
 
     @Override
-    public int extend(int i, int current) {
+    public int extend(int i, int current, String str) {
         return 0;
     }
 }

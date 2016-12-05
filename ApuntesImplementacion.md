@@ -34,4 +34,4 @@ Para comenzar se implementará el algoritmo de Ukkonen sin los *suffix links* (p
 
 1. Se removieron las implementaciones de `extend` y `makeTree` de la clase `SuffixTree` para empezar la implementación en limpio.
 2. Se agrega el método `extend` a `INode` y `Edge`, para que estos manejen los distintos casos de extensión (más facil que manejarlo desde `SuffixTree`).
-3. 
+3. Para poder manejar las extensiones recursivamente, dado que se ocupan indices como tags, es necesario pasarle al método `extend` el string del SuffixTree. Se puede explorar una alternativa más eficiente más adelante.
