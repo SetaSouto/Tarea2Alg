@@ -8,5 +8,4 @@ class LeafTest {
         Leaf leaf = new Leaf(1);
         assertEquals(1, leaf.getValue());
     }
-
 }

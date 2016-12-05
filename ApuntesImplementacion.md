@@ -32,4 +32,4 @@ Llegué hasta acá no más, Work In Progress (WIP).
 
 Para comenzar se implementará el algoritmo de Ukkonen sin los *suffix links* (por simplicidad):
 
-1. 
+1. Se removieron las implementaciones de `extend` y `makeTree` de la clase `SuffixTree` para empezar la implementación en limpio.

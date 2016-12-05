@@ -5,6 +5,7 @@ Como era de esperarse, el enunciado está bien enredado. Acá iré colocando las
 Primero recordemos lo que es un suffix tree. Es un árbol que tiene todos los sufijos posibles de la palabra donde cada arco indica un caracter y al final -en la hoja- se encuentra un valor que indica la posición en que ese substring se encuentra dentro del string.  
 
 Una imagen de un suffix tree de la palabra *banana* es:
+
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Suffix_tree_BANANA.svg/250px-Suffix_tree_BANANA.svg.png)
 
 ### Suffix Trees implícitos
@@ -13,7 +14,11 @@ Son como los suffix trees pero donde se :
 * Elimina los arcos con el símbolo $.  
 * Se eliminan los nodos que no tienen al menos dos hijos.
 
-En el ejemplo de banana, según yo se debería eliminar el primer nodo a la izquierda de la raíz, pues se quedaría sólo con un hijo.  
+En el ejemplo de banana, según yo se debería eliminar el primer nodo a la izquierda de la raíz, pues se quedaría sólo con un hijo. 
+ 
+A continuación se muestra una imágen de la conversión de suffix tree a sufix tree implícito:
+
+![implicit suffix tree](images/implicit_sufix_tree.jpg)
 
 No he leído [este pdf](http://web.stanford.edu/~mjkay/gusfield.pdf) pero al parecer tiene todo, como se construyen los suffix trees en tiempo lineal y ejemplos de suffix trees y los implícitos.  
 En caso de quedarse atascado se puede acudir a ese pdf.  
