@@ -13,7 +13,11 @@ Son como los suffix trees pero donde se :
 * Elimina los arcos con el símbolo $.  
 * Se eliminan los nodos que no tienen al menos dos hijos.
 
-En el ejemplo de banana, según yo se debería eliminar el primer nodo a la izquierda de la raíz, pues se quedaría sólo con un hijo.  
+En el ejemplo de banana, según yo se debería eliminar el primer nodo a la izquierda de la raíz, pues se quedaría sólo con un hijo. 
+ 
+A continuación se muestra una imágen de la conversión de suffix tree a sufix tree implícito:
+
+![implicit suffix tree](images/implicit_sufix_tree.jpg)
 
 No he leído [este pdf](http://web.stanford.edu/~mjkay/gusfield.pdf) pero al parecer tiene todo, como se construyen los suffix trees en tiempo lineal y ejemplos de suffix trees y los implícitos.  
 En caso de quedarse atascado se puede acudir a ese pdf.  

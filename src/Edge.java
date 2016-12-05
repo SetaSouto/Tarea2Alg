@@ -1,34 +1,32 @@
-/**
- * Created by souto on 01-12-2016.
- */
 public class Edge {
     private int[] tag;
     private INode child;
 
     /**
      * Constructor.
-     * The index represent the tag of the edge, if the tag is S[j..k], the index are i1=j, i2=k.
+     * The edge tag is defined by two integer values corresponding to the indexes of the first and last
+     * characters of edge in the original string. If the edge is S[j..k], these indexes are i1 = j, i2 = k.
      *
      * @param i1    index of the first character of the tag.
      * @param i2    index of the last character of the tag.
      * @param child child node.
      */
-    public Edge(int i1, int i2, INode child) {
+    public Edge (int i1, int i2, INode child) {
         this.tag = new int[]{i1, i2};
         this.child = child;
     }
 
     /**
-     * Returns the index that represent the tag of the edge.
+     * Returns the edge's tag.
      *
-     * @return the index of the tag.
+     * @return the edge's tag indexes.
      */
-    public int[] getTagIndex() {
+    public int[] getTag() {
         return this.tag;
     }
 
     /**
-     * Returns the length of this edge's tag.
+     * Returns the length of the edge.
      *
      * @return the tag's length.
      */
@@ -45,13 +43,17 @@ public class Edge {
         return this.child;
     }
 
+    public int extend (int i, int j) {
+        // Rule 1:
+    }
+
     /**
-     * Adds a character at the end of the tag. Its only need the index of the character in the
-     * real string S. If you want to add the character S[k] you give the int k.
+     * Adds a character at the end of the tag. It only needs the index of the character in the
+     * real string S. If you want to add the character S[k], k must be provided.
      *
      * @param c index representing the character added to the tag.
      */
-    public void addCharIndex(int c) {
+    public void addCharIndex (int c) {
         if (c == this.tag[1] + 1) {
             this.tag[1] = c;
         } else {
@@ -68,7 +70,7 @@ public class Edge {
      *
      * @param untilIndex index until this edge has to keep its tag.
      */
-    public Node splitEdge(int untilIndex) {
+    public Node splitEdge (int untilIndex) {
         if (untilIndex > this.tag[0] && untilIndex < this.tag[1]) {
             Edge newEdge = new Edge(untilIndex + 1, this.tag[1], this.child);
             this.tag[1] = untilIndex;
