@@ -1,8 +1,26 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node implements INode {
     private List<Edge> edges;
+    private Edge toFather;
     private Node link;
+
+    /**
+     * Constructor for the root node (no edge to father)
+     */
+    public Node() {
+        this.edges = new ArrayList<>();
+        this.toFather = null;
+    }
+
+    /**
+     * Constructor for internal nodes.
+     */
+    public Node(Edge toFather) {
+        this.edges = new ArrayList<>();
+        this.toFather = toFather;
+    }
 
     /**
      * Adds a edge to the node.

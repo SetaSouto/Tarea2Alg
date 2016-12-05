@@ -50,4 +50,5 @@ class EdgeTest {
         }
     }
 
+    // TODO: test the extend method.
 }
