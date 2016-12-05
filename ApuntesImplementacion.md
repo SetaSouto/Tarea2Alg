@@ -2,7 +2,7 @@
 
 Acá van las lluvias de ideas al momento de ir implementando los algoritmos.
 
-### Node
+## Node
 
 Bueno, un nodo debe tener un collection de hijos el cual debe ser siempre mayor a dos pues si fuera un solo hijo este nodo se debería eliminar.  
 
@@ -18,7 +18,7 @@ En vista de que una hoja no puede ser padre, diremos que un Edge solo tiene de I
 
 Avancé más. Hasta ahora tenemos que las edges pueden hacer `split`, que es necesario cuando estamos recorriendo el camino de $\beta$ y se termina el string a mitad del arco, en ese momento se debe crear un nodo y todo el show. Para eso sirve el split, que separa el edge rápidamente y me devuelve el nuevo nodo que se debe crear, entonces el algoritmo lo único que debería hacer es agregar una hoja al nuevo nodo con el valor de $j$ no más.  
 
-Actualización domingo 4/12:  
+## Domingo 4/12 (souto):  
 No había leído todo el enunciado y había puesto como tag de los arcos strings, siendo que se manejan simplemente los índices de los caracteres inicial y final del tag en el string verdadero. Se cambió eso y eso modificó los otros métodos.  
 
 Se agregaron algunos métodos más como getLength() que permite saber el largo del tag del arco para ver si lo podemos saltar de una o no.  
@@ -27,3 +27,5 @@ Comenzamos con la creación de la clase del árbol que implementará los algorit
 Cuando se crea el árbol se le pasa el string y se llama a la creación al tiro.  
 Dentro de la creación del árbol se separa la extensión de la fase, es decir, hay un método que se llama `extend(j, i)`, que hace la extensión $j$ de la fase $i$.  
 Llegué hasta acá no más, Work In Progress (WIP).  
+
+## Domingo 4/12 (clavero):
