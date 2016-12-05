@@ -1,33 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node implements INode {
-    private List<Edge> edges;
+public class Node extends AbstractNode {
+    private List<AbstractNode> children;
 
     /**
-     * Constructor. Initialises the collection of edges.
+     * Constructor.
      */
-    public Node() {
-        this.edges = new ArrayList<>();
+    public Node () {
+        this.children = new ArrayList<>();
     }
 
-    /**
-     * Adds a edge to the node.
-     *
-     * @param edge edge to be added.
-     */
-    public void addEdge(Edge edge) {
-        this.edges.add(edge);
+    public void addChild (AbstractNode node) {
+        this.children.add(node);
     }
 
-    /**
-     * Getter of the collection of Edges.
-     *
-     * @return the edges of this node.
-     */
-    public List<Edge> getEdges() {
-        return this.edges;
+    public List<AbstractNode> getChildren () {
+        return this.children;
     }
 
-    public
+    @Override
+    public void extend(int i, int current) {
+
+    }
 }

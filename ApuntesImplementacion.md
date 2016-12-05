@@ -33,3 +33,4 @@ Llegué hasta acá no más, Work In Progress (WIP).
 Para comenzar se implementará el algoritmo de Ukkonen sin los *suffix links* (por simplicidad):
 
 1. Borré todo lo relacionado con los suffix links de la clase `Node`. Se puede recuperar desde el git.
+2. Para manejar los distintos casos de las extensiones de manera más sencilla, eliminaré los edges. En su lugar cada nodo mantendrá dos indices que indican el rango de indices (en el string que define al arbol) que definen el arco entre el nodo y su padre.

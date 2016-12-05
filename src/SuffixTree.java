@@ -16,7 +16,6 @@ public class SuffixTree {
      */
     private void makeTree() {
         // Create first implicit suffix tree by adding the first character index.
-        root.addEdge(new Edge(0,0, new Leaf(0)));
 
         for (int i = 0; i < str.length(); i++) {    // phase
             for (int j = 0; j < i; j++) {           // extension
