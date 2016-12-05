@@ -51,10 +51,12 @@ public class Edge {
      */
     public int extend (int i, int j, int current) {
         if (i - current < getLength() - 1) {
-            splitEdge(i - current);
+            splitEdge(tag[0] + i - current);
             Edge newEdge = new Edge(i+1, i+1, new Leaf(j));
             ((Node) child).addEdge(newEdge); // after split, child is an internal node => cast is safe
             return 2;
+        } else {
+            return child.extend(i, j, current + getLength() - 1);
         }
     }
 
