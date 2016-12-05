@@ -12,4 +12,9 @@ public class Leaf implements INode {
     public int getValue() {
         return this.value;
     }
+
+    @Override
+    public int extend(int i, int current) {
+        return 0;
+    }
 }
