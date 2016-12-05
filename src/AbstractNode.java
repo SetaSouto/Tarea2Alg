@@ -1,6 +1,10 @@
 public abstract class AbstractNode {
 
-    int[] edge;
+    protected int[] edge;
+
+    public int[] getEdge () {
+        return edge;
+    }
 
     /**
      * Extends node with the character at the position i+1 of the suffix tree string.
