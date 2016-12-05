@@ -1,6 +1,3 @@
-/**
- * Created by souto on 01-12-2016.
- */
 public class Leaf implements INode {
     private int value;
 
@@ -15,5 +12,4 @@ public class Leaf implements INode {
     public int getValue() {
         return this.value;
     }
-
 }

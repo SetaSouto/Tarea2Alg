@@ -4,9 +4,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created by souto on 01-12-2016.
- */
 class EdgeTest {
     Leaf leaf = new Leaf(1);
     Edge edge = new Edge(5, 10, leaf);

@@ -29,3 +29,7 @@ Dentro de la creación del árbol se separa la extensión de la fase, es decir, 
 Llegué hasta acá no más, Work In Progress (WIP).  
 
 ## Domingo 4/12 (clavero):
+
+Para comenzar se implementará el algoritmo de Ukkonen sin los *suffix links* (por simplicidad):
+
+1. 
