@@ -1,6 +1,3 @@
-/**
- * Created by souto on 01-12-2016.
- */
 public class Edge {
     private int[] tag;
     private INode child;
@@ -48,14 +45,16 @@ public class Edge {
     /**
      * Extends the suffix tree recursively with the character S[i+1].
      * @param i         the phase index. Indicates that the tree will be extended with S[i+1].
+     * @param j         the extension index.
      * @param current   the current substring index. Used to determine paths along the tree.
-     * @param str       the suffix tree string.
      * @return          the extension rule used. Either 1, 2 or 3.
      */
-    public int extend (int i, int current, String str) {
-        // Check matches character by character.
-        for (int k = tag[0]; k <= tag[1]; k++) {
-
+    public int extend (int i, int j, int current) {
+        if (i - current < getLength() - 1) {
+            splitEdge(i - current);
+            Edge newEdge = new Edge(i+1, i+1, new Leaf(j));
+            ((Node) child).addEdge(newEdge); // after split, child is an internal node => cast is safe
+            return 2;
         }
     }
 
