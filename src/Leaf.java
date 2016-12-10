@@ -25,7 +25,7 @@ class Leaf extends AbstractNode {
     AbstractNode extend(String str, int j) {
         int match = match(str);
         if (match == edgeLength()) {
-            if (match == str.length()) {
+            if (match == str.length() - 1) {
                 edge = edge.concat(str.substring(str.length() - 1));
                 return this;
             } else {
