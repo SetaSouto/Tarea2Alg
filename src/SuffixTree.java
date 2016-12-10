@@ -6,7 +6,7 @@ public class SuffixTree {
      * Constructor. Receives a string and creates its suffix tree.
      */
     public SuffixTree (String str) {
-        this.root = new Node();
+        this.root = new Node("");
         this.str = str;
         this.makeTree();
     }

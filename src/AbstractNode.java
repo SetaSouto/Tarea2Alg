@@ -42,10 +42,27 @@ abstract class AbstractNode {
     }
 
     /**
+     * Splits the edge on the match index, adding a new path for the extension defined by str.
+     *
+     * @param index the position where the edge will be split.
+     * @param str the substring with which the tree will be extended.
+     * @param j extension index. If a new leaf node is created, this value will be assigned to it.
+     * @return the uppermost node of the resulting split.
+     */
+    AbstractNode splitEdge(int index, String str, int j) {
+        Node node = new Node(edge.substring(0, index));
+        edge = edge.substring(index);
+        node.addChild(this);
+        node.addChild(new Leaf(j, str.substring(index)));
+        return node;
+    }
+
+    /**
      * Extends the SuffixTree with a new substring. Extensions are made with the specified rules.
      *
      * @param str the substring with which the tree must be extended.
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
+     * @return the resulting node after the extension.
      */
-    abstract void extend(String str, int j);
+    abstract AbstractNode extend(String str, int j);
 }

@@ -22,12 +22,17 @@ public class Leaf extends AbstractNode {
     }
 
     @Override
-    void extend(String str, int j) {
+    AbstractNode extend(String str, int j) {
         int match = match(str.substring(0, str.length() - 2));
-        if (match == edgeLength()) {
-            edge = edge.concat(str.substring(str.length() - 1));
-        } else {
-            throw new Error("Substring " + str + " does not match at leaf " + edge);
+        if (match == edgeLength() - 1) {
+            if (match == str.length() - 1) {
+                edge = edge.concat(str.substring(str.length() - 1));
+                return this;
+            } else {
+                throw new Error("Substring " + str + " does not match at leaf " + edge);
+            }
+        } else { // str ran out of chars before edge ended, thus the edge must be split
+            return splitEdge(match, str, j);
         }
     }
 }
