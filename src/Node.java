@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node extends AbstractNode {
+class Node extends AbstractNode {
     private List<AbstractNode> children;
 
     /**
@@ -19,7 +19,7 @@ public class Node extends AbstractNode {
      *
      * @param node the node to be included in the children list.
      */
-    public void addChild (AbstractNode node) {
+    void addChild(AbstractNode node) {
         this.children.add(node);
     }
 

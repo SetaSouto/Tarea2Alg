@@ -1,4 +1,4 @@
-public class Leaf extends AbstractNode {
+class Leaf extends AbstractNode {
     private int value;
 
     /**
@@ -7,7 +7,7 @@ public class Leaf extends AbstractNode {
      * @param value initial value of the leaf.
      * @param edge the initial edge value.
      */
-    public Leaf(int value, String edge) {
+    Leaf(int value, String edge) {
         this.value = value;
         this.edge = edge;
     }
@@ -17,7 +17,7 @@ public class Leaf extends AbstractNode {
      *
      * @return integer with the node's value.
      */
-    public int getValue() {
+    int getValue() {
         return this.value;
     }
 

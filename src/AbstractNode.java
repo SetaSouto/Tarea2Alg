@@ -2,28 +2,6 @@ abstract class AbstractNode {
     String edge;
 
     /**
-     * Returns the value of the edge leading to de node.
-     *
-     * @return string with the value of the edge leading to the node.
-     */
-    String getEdge() {
-        return edge;
-    }
-
-    /**
-     * Matches given substring with the node's tag.
-     *
-     * @return the index (in the node's tag) where the last matching character occurred.
-     */
-    int match (String str) {
-        int lastMatch = 0;
-        for (int i = 0; i < edge.length(); i++) {
-            if (edge.charAt(i) != str.charAt(i)) lastMatch++;
-        }
-        return lastMatch;
-    }
-
-    /**
      * Gets the first char of the edge leading to the node.
      *
      * @return the first char of the edge leading to the node.
@@ -39,6 +17,29 @@ abstract class AbstractNode {
      */
     int edgeLength() {
         return edge.length();
+    }
+
+    /**
+     * Returns the value of the edge leading to de node.
+     *
+     * @return string with the value of the edge leading to the node.
+     */
+    String getEdge() {
+        return edge;
+    }
+
+    /**
+     * Matches given substring with the node's tag.
+     *
+     * @return the index (in the node's tag) where the last matching character occurred.
+     */
+    int match (String str) {
+        int lastMatch = -1;
+        for (int i = 0; i < edge.length(); i++) {
+            if (i >= str.length() || edge.charAt(i) != str.charAt(i)) break;
+            lastMatch++;
+        }
+        return lastMatch;
     }
 
     /**
