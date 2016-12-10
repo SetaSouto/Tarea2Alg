@@ -1,6 +1,5 @@
 abstract class AbstractNode {
     String edge;
-    SuffixTree tree;
 
     /**
      * Returns the value of the edge leading to de node.
@@ -16,10 +15,10 @@ abstract class AbstractNode {
      *
      * @return the index (in the node's tag) where the last matching character occurred.
      */
-    int match (String substr) {
+    int match (String str) {
         int lastMatch = 0;
         for (int i = 0; i < edge.length(); i++) {
-            if (edge.charAt(i) != substr.charAt(i)) lastMatch++;
+            if (edge.charAt(i) != str.charAt(i)) lastMatch++;
         }
         return lastMatch;
     }
@@ -45,7 +44,8 @@ abstract class AbstractNode {
     /**
      * Extends the SuffixTree with a new substring. Extensions are made with the specified rules.
      *
-     * @param substring the substring with which the tree must be extended.
+     * @param str the substring with which the tree must be extended.
+     * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      */
-    abstract void extend (String substring);
+    abstract void extend(String str, int j);
 }
