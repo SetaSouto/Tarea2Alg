@@ -5,7 +5,8 @@ public class Leaf extends AbstractNode {
      * Constructor.
      * @param value initial value of the leaf.
      */
-    public Leaf(int value) {
+    public Leaf(SuffixTree tree, int value) {
+        this.tree = tree;
         this.value = value;
     }
 
@@ -14,7 +15,7 @@ public class Leaf extends AbstractNode {
     }
 
     @Override
-    public void extend(int i, int current) {
+    public void extend(int i, int j, int current) {
         if (current == i) {         // end of the path
             if (i == edge[1]) {
                 edge[1]++;          // Rule 1: i+1 added to the edge leading to the leaf.

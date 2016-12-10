@@ -7,7 +7,8 @@ public class Node extends AbstractNode {
     /**
      * Constructor.
      */
-    public Node () {
+    public Node (SuffixTree tree) {
+        this.tree = tree;
         this.children = new ArrayList<>();
     }
 
@@ -20,7 +21,7 @@ public class Node extends AbstractNode {
     }
 
     @Override
-    public void extend(int i, int current) {
+    public void extend(int i, int j, int current) {
         if (i == current) { // end of the search path
             if (i < edge[1]) {
 
@@ -34,7 +35,7 @@ public class Node extends AbstractNode {
         } else {
             for (AbstractNode node : children) {
                 if (node.getEdge()[0] == current + 1) {
-                    extend(i, current + 1);
+                    extend(i, , current + 1);
                 }
             }
         }
