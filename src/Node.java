@@ -28,15 +28,15 @@ class Node extends AbstractNode {
      *
      * @return a list of node objects.
      */
-    public List<AbstractNode> getChildren () {
+    List<AbstractNode> getChildren() {
         return this.children;
     }
 
     @Override
     AbstractNode extend (String str, int j) {
-        int match = match(str.substring(0, str.length() - 2));
-        if (match == edgeLength() - 1) { // the substring started with the complete edge
-            if (match == str.length() - 2) { // path down tree ended, extension must be made
+        int match = match(str);
+        if (match == edgeLength()) { // the substring started with the complete edge
+            if (match == str.length() - 1) { // path down tree ended, extension must be made
                 for (AbstractNode node : children) {
                     if (node.firstChar() == str.charAt(str.length() - 1)) {
                         return this; // if found, no extension is made (rule 3)
@@ -49,7 +49,7 @@ class Node extends AbstractNode {
                 for (AbstractNode node : children) {
                     if (node.firstChar() == str.charAt(match)) {
                         // extend child with the unmatched remainder of the substring
-                        AbstractNode extended = node.extend(str.substring(match, str.length() - 1), j);
+                        AbstractNode extended = node.extend(str.substring(match, str.length()), j);
                         children.remove(node);
                         addChild(extended);
                         return this;
