@@ -1,3 +1,5 @@
+import java.util.List;
+
 class SuffixTree {
     private Root root;
     private String str;
@@ -18,6 +20,15 @@ class SuffixTree {
      */
     Root getRoot () {
         return this.root;
+    }
+
+    /**
+     * Returns the root's children.
+     *
+     * @return a list with the tree's root's children.
+     */
+    List<AbstractNode> getChildren () {
+        return root.getChildren();
     }
 
     /**

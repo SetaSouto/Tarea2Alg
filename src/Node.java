@@ -17,8 +17,8 @@ class Node extends AbstractNode {
                 toLink.addLink(node);
                 linkPending = false;
             } else {
-                throw new Error("Attempting to create an invalid suffix link between nodes "
-                                    + node.edge + " and " + toLink.edge);
+                System.out.println("Attempting to create an invalid suffix link between nodes "
+                                                            + node.edge + " and " + toLink.edge);
             }
         } else {
             toLink = node;
@@ -69,7 +69,6 @@ class Node extends AbstractNode {
         this.edge = edge;
         this.children = new ArrayList<>();
         this.suffixLinks = new ArrayList<>();
-        //link(this);
     }
 
     /**
