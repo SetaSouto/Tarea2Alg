@@ -26,21 +26,18 @@ class NodeTest {
 
         Node.link(ba);
 
-        assertTrue(Node.linkPending);
         assertEquals(ba, Node.toLink);
         assertEquals(0, ba.getSuffixLinks().size());
         assertEquals(0, a.getSuffixLinks().size());
 
         Node.link(a);
 
-        assertFalse(Node.linkPending);
         assertEquals(1, ba.getSuffixLinks().size());
         assertEquals(a, ba.getSuffixLinks().get(0));
         assertEquals(0, a.getSuffixLinks().size());
 
         Node.link(a);
 
-        assertTrue(Node.linkPending);
         assertEquals(a, Node.toLink);
         assertEquals(1, ba.getSuffixLinks().size());
         assertEquals(a, ba.getSuffixLinks().get(0));
@@ -48,7 +45,6 @@ class NodeTest {
 
         Node.link(ba);
 
-        assertFalse(Node.linkPending);
         assertEquals(1, ba.getSuffixLinks().size());
         assertEquals(a, ba.getSuffixLinks().get(0));
         assertEquals(1, a.getSuffixLinks().size());
@@ -100,6 +96,22 @@ class NodeTest {
         assertEquals(-1, banana.match("canana"));
     }
 
+    @Test
+    void splitEdge () {
+        Node banana = new Node("banana");
+        String extension = "banono";
+
+        assertEquals(2, banana.match(extension));
+
+        Node result = (Node) banana.splitEdge(2, extension, 2);
+
+        assertEquals("ban", result.edge);
+        assertEquals("ana", result.getChildren().get(0).edge);
+        assertEquals("ono", result.getChildren().get(1).edge);
+        assertEquals(0, ((Node) result.getChildren().get(0)).getChildren().size());
+        assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
+    }
+
     // Node methods
 
     @Test
@@ -145,22 +157,6 @@ class NodeTest {
     }
 
     // Overridden methods
-
-    @Test
-    void splitEdge () {
-        Node banana = new Node("banana");
-        String extension = "banono";
-
-        assertEquals(2, banana.match(extension));
-
-        Node result = (Node) banana.splitEdge(2, extension, 2);
-
-        assertEquals("ban", result.edge);
-        assertEquals("ana", result.getChildren().get(0).edge);
-        assertEquals("ono", result.getChildren().get(1).edge);
-        assertEquals(0, ((Node) result.getChildren().get(0)).getChildren().size());
-        assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
-    }
 
     @Test
     void extend () {

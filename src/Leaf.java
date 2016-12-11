@@ -22,16 +22,6 @@ class Leaf extends AbstractNode {
     }
 
     @Override
-    AbstractNode splitEdge(int index, String str, int j) {
-        Node node = new Node(edge.substring(0, index + 1));
-        Node.link(node);
-        edge = edge.substring(index + 1);
-        node.addChild(this);
-        node.addChild(new Leaf(str.substring(index + 1), j));
-        return node;
-    }
-
-    @Override
     AbstractNode extend (String str, int j) {
         int match = match(str);
         if (match < edgeLength() - 1) {

@@ -50,17 +50,6 @@ class LeafTest {
         assertEquals(-1, banana.match("canana"));
     }
 
-    // Leaf methods
-
-    @Test
-    void getValue () {
-        assertEquals(0, ba.getValue());
-        assertEquals(10000000, na.getValue());
-        assertNotEquals(10000000, ba.getValue());
-    }
-
-    // Overridden methods
-
     @Test
     void splitEdge () {
         Leaf banana = new Leaf("banana", 1);
@@ -76,6 +65,17 @@ class LeafTest {
         assertEquals(1, ((Leaf) result.getChildren().get(0)).getValue());
         assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
     }
+
+    // Leaf methods
+
+    @Test
+    void getValue () {
+        assertEquals(0, ba.getValue());
+        assertEquals(10000000, na.getValue());
+        assertNotEquals(10000000, ba.getValue());
+    }
+
+    // Overridden methods
 
     @Test
     void extend () {

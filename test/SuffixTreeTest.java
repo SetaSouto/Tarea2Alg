@@ -39,7 +39,7 @@ class SuffixTreeTest {
 
         // There should be a suffix link from child2 (na) to child3 (a)
         assertEquals(1, child2.getSuffixLinks().size());
-        assertEquals(1, child3.getSuffixLinks().size());
+        assertEquals(0, child3.getSuffixLinks().size());
         assertEquals(child3, child2.getSuffixLinks().get(0));
 
         // Child 2 branch
@@ -55,7 +55,7 @@ class SuffixTreeTest {
         Node child31 = (Node) child3.getChildren().get(0);
         Leaf child32 = (Leaf) child3.getChildren().get(1);
 
-        assertEquals("nas", child31.getEdge());
+        assertEquals("na", child31.getEdge());
         assertEquals("s", child32.getEdge());
 
         // There should be a suffix link from child31 (ana) to child2 (na)

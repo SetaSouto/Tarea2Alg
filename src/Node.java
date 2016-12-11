@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Node extends AbstractNode {
-    static boolean linkPending = false;
-    static Node toLink;
+    static Node toLink = new Node("");
 
     /**
      * Sets up the received Node for a suffix link. If there is a Node with a pending link,
@@ -12,18 +11,10 @@ class Node extends AbstractNode {
      * @param node a newly created node that needs linking.
      */
     static void link (Node node) {
-        if (linkPending) {
-            if (checkLink(node, toLink)) {
-                toLink.addLink(node);
-                linkPending = false;
-            } else {
-                System.out.println("Attempting to create an invalid suffix link between nodes "
-                                                            + node.edge + " and " + toLink.edge);
-            }
-        } else {
-            toLink = node;
-            linkPending = true;
+        if (checkLink(node, toLink)) {
+            toLink.addLink(node);
         }
+        toLink = node;
     }
 
     /**
@@ -114,17 +105,6 @@ class Node extends AbstractNode {
      */
     List<AbstractNode> getChildren () {
         return this.children;
-    }
-
-    @Override
-    AbstractNode splitEdge(int index, String str, int j) {
-        Node node = new Node(edge.substring(0, index + 1));
-        node.addLinks(this.getSuffixLinks());
-        edge = edge.substring(index + 1);
-        suffixLinks = new ArrayList<>();
-        node.addChild(this);
-        node.addChild(new Leaf(str.substring(index + 1), j));
-        return node;
     }
 
     @Override
