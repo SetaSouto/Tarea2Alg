@@ -12,7 +12,7 @@ class Node extends AbstractNode {
      */
     static void link (Node node) {
         if (checkLink(node, toLink)) {
-            toLink.addLink(node);
+            toLink.setLink(node);
         }
         toLink = node;
     }
@@ -49,7 +49,7 @@ class Node extends AbstractNode {
     }
 
     private List<AbstractNode> children;
-    private List<Node> suffixLinks;
+    private Node suffixLink;
 
     /**
      * Constructor.
@@ -59,25 +59,16 @@ class Node extends AbstractNode {
     public Node (String edge) {
         this.edge = edge;
         this.children = new ArrayList<>();
-        this.suffixLinks = new ArrayList<>();
+        this.suffixLink = null;
     }
 
     /**
-     * Adds a new suffix link.
+     * Set the suffix link.
      *
      * @param link the suffix link destination node.
      */
-    void addLink (Node link) {
-        this.suffixLinks.add(link);
-    }
-
-    /**
-     * Adds all the received suffix links to the node's suffix link list.
-     *
-     * @param links the new links to be included.
-     */
-    void addLinks (List<Node> links) {
-        this.suffixLinks.addAll(links);
+    void setLink (Node link) {
+        this.suffixLink = link;
     }
 
     /**
@@ -85,8 +76,8 @@ class Node extends AbstractNode {
      *
      * @return a list of Node objects.
      */
-    List<Node> getSuffixLinks () {
-        return this.suffixLinks;
+    Node getSuffixLink () {
+        return this.suffixLink;
     }
 
     /**
@@ -117,6 +108,9 @@ class Node extends AbstractNode {
                 return splitEdge(match, str, j);
             }
         } else { // the substring started with the complete edge
+            Root.vString = Root.vString.concat(edge);
+            if (suffixLink == null) Root.vNode = this;
+
             for (AbstractNode child : children) {
                 if (child.firstChar() == str.charAt(match + 1)) {
                     // extend child with the unmatched remainder of the substring

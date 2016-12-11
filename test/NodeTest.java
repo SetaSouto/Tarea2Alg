@@ -27,28 +27,24 @@ class NodeTest {
         Node.link(ba);
 
         assertEquals(ba, Node.toLink);
-        assertEquals(0, ba.getSuffixLinks().size());
-        assertEquals(0, a.getSuffixLinks().size());
+        assertEquals(null, ba.getSuffixLink());
+        assertEquals(null, a.getSuffixLink());
 
         Node.link(a);
 
-        assertEquals(1, ba.getSuffixLinks().size());
-        assertEquals(a, ba.getSuffixLinks().get(0));
-        assertEquals(0, a.getSuffixLinks().size());
+        assertEquals(a, ba.getSuffixLink());
+        assertEquals(null, a.getSuffixLink());
 
         Node.link(a);
 
         assertEquals(a, Node.toLink);
-        assertEquals(1, ba.getSuffixLinks().size());
-        assertEquals(a, ba.getSuffixLinks().get(0));
-        assertEquals(0, a.getSuffixLinks().size());
+        assertEquals(a, ba.getSuffixLink());
+        assertEquals(null, a.getSuffixLink());
 
         Node.link(ba);
 
-        assertEquals(1, ba.getSuffixLinks().size());
-        assertEquals(a, ba.getSuffixLinks().get(0));
-        assertEquals(1, a.getSuffixLinks().size());
-        assertEquals(ba, a.getSuffixLinks().get(0));
+        assertEquals(ba, a.getSuffixLink());
+        assertEquals(a, ba.getSuffixLink());
     }
 
     @Test
@@ -116,31 +112,12 @@ class NodeTest {
 
     @Test
     void getSuffixLinks () {
-        // Links added vía addLink
-
         Node root = new Node("");
-        root.addLink(ba);
-        root.addLink(na);
-        root.addLink(na);
+        root.setLink(ba);
+        assertEquals(ba, root.getSuffixLink());
 
-        assertEquals(3, root.getSuffixLinks().size());
-        assertEquals(ba, root.getSuffixLinks().get(0));
-        assertEquals(na, root.getSuffixLinks().get(1));
-        assertEquals(na, root.getSuffixLinks().get(2));
-
-        // Links added via addLinks
-
-        Node newRoot = new Node("");
-        List<Node> links = new ArrayList<>();
-        links.add(ba);
-        links.add(na);
-        links.add(na);
-        newRoot.addLinks(links);
-
-        assertEquals(3, newRoot.getSuffixLinks().size());
-        assertEquals(ba, newRoot.getSuffixLinks().get(0));
-        assertEquals(na, newRoot.getSuffixLinks().get(1));
-        assertEquals(na, newRoot.getSuffixLinks().get(2));
+        root.setLink(na);
+        assertEquals(na, root.getSuffixLink());
     }
 
     @Test

@@ -1,4 +1,4 @@
-abstract class AbstractNode {
+abstract class AbstractNode implements INode {
     String edge;
 
     /**

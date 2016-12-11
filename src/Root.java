@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Root {
+class Root implements INode {
+    static INode vNode = null;
+    static String vString = "";
+
     private List<AbstractNode> children;
+    AbstractNode suffixLink;
 
     Root() {
         this.children = new ArrayList<>();
@@ -33,16 +37,30 @@ class Root {
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      */
     void extend(String str, int j) {
-        // Try to find a matching path for str
-        for (AbstractNode child : children) {
-            if (child.firstChar() == str.charAt(0)) {
-                AbstractNode extended = child.extend(str, j);
-                children.remove(child);
-                addChild(extended);
-                return;
+        if (false) { //vNode != this
+            //AbstractNode extended = ((Node) vNode).getSuffixLinks();
+            //children.remove(child);
+            //addChild(extended);
+        } else {
+            vNode = this;
+            vString = "";
+            // Try to find a matching path for str
+            for (AbstractNode child : children) {
+                if (child.firstChar() == str.charAt(0)) {
+                    AbstractNode extended = child.extend(str, j);
+                    children.remove(child);
+                    addChild(extended);
+                    return;
+                }
+            }
+            // If none available, add a new leaf node
+            if (children.isEmpty()) {
+                AbstractNode completePath = new Leaf(str, j);
+                addChild(completePath);
+                suffixLink = completePath;
+            } else {
+                addChild(new Leaf(str, j));
             }
         }
-        // If none available, add a new leaf node
-        addChild(new Leaf(str, j));
     }
 }

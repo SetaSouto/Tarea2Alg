@@ -23,8 +23,9 @@ class SuffixTreeTest {
     @Test
     void suffixLinks () {
         SuffixTree tree = new SuffixTree("bananas");
-        List<AbstractNode> children = tree.getChildren();
+        assertEquals("bananas", tree.getRoot().suffixLink.getEdge());
 
+        List<AbstractNode> children = tree.getChildren();
         assertEquals(4, children.size());
 
         Leaf child1 = (Leaf) children.get(0);
@@ -38,9 +39,8 @@ class SuffixTreeTest {
         assertEquals("s", child4.getEdge());
 
         // There should be a suffix link from child2 (na) to child3 (a)
-        assertEquals(1, child2.getSuffixLinks().size());
-        assertEquals(0, child3.getSuffixLinks().size());
-        assertEquals(child3, child2.getSuffixLinks().get(0));
+        assertEquals(child3, child2.getSuffixLink());
+        assertEquals(null, child3.getSuffixLink());
 
         // Child 2 branch
         assertEquals(2, child2.getChildren().size());
@@ -59,8 +59,7 @@ class SuffixTreeTest {
         assertEquals("s", child32.getEdge());
 
         // There should be a suffix link from child31 (ana) to child2 (na)
-        assertEquals(1, child31.getSuffixLinks().size());
-        assertEquals(child2, child31.getSuffixLinks().get(0));
+        assertEquals(child2, child31.getSuffixLink());
 
         // Child 31 branch
         Leaf child311 = (Leaf) child31.getChildren().get(0);
