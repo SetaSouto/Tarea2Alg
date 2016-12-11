@@ -6,7 +6,7 @@ abstract class AbstractNode {
      *
      * @return the first char of the edge leading to the node.
      */
-    char firstChar() {
+    char firstChar () {
         return edge.charAt(0);
     }
 
@@ -15,7 +15,7 @@ abstract class AbstractNode {
      *
      * @return the length of the edge leading to the node.
      */
-    int edgeLength() {
+    int edgeLength () {
         return edge.length();
     }
 
@@ -24,7 +24,7 @@ abstract class AbstractNode {
      *
      * @return string with the value of the edge leading to the node.
      */
-    String getEdge() {
+    String getEdge () {
         return edge;
     }
 
@@ -50,11 +50,11 @@ abstract class AbstractNode {
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      * @return the uppermost node of the resulting split.
      */
-    AbstractNode splitEdge(int index, String str, int j) {
+    AbstractNode splitEdge (int index, String str, int j) {
         Node node = new Node(edge.substring(0, index));
         edge = edge.substring(index);
         node.addChild(this);
-        node.addChild(new Leaf(j, str.substring(index)));
+        node.addChild(new Leaf(str.substring(index), j));
         return node;
     }
 
@@ -65,5 +65,5 @@ abstract class AbstractNode {
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      * @return the resulting node after the extension.
      */
-    abstract AbstractNode extend(String str, int j);
+    abstract AbstractNode extend (String str, int j);
 }

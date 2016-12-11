@@ -26,7 +26,7 @@ class NodeTest {
 
     @Test
     void edgeLength () {
-        Leaf empty = new Leaf(1, "");
+        Leaf empty = new Leaf("", 1);
 
         assertEquals(0, empty.edgeLength());
         assertEquals(2, ba.edgeLength());
@@ -69,7 +69,7 @@ class NodeTest {
     // Node methods
 
     @Test
-    void getChildren() {
+    void getChildren () {
         Node root = new Node("");
         root.addChild(ba);
         root.addChild(na);
@@ -87,8 +87,8 @@ class NodeTest {
     void extend () {
         // First case: implicit extension (rule 3)
         Node bana = new Node( "bana");
-        bana.addChild(new Leaf(1, "nas"));
-        bana.addChild(new Leaf(2, "so"));
+        bana.addChild(new Leaf("nas", 1));
+        bana.addChild(new Leaf("so", 2));
         Node result = (Node) bana.extend("banas", 3);
 
         assertEquals(2, result.getChildren().size());

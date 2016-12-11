@@ -4,10 +4,10 @@ class Leaf extends AbstractNode {
     /**
      * Constructor.
      *
-     * @param value initial value of the leaf.
      * @param edge the initial edge value.
+     * @param value initial value of the leaf.
      */
-    Leaf(int value, String edge) {
+    Leaf(String edge, int value) {
         this.value = value;
         this.edge = edge;
     }
@@ -17,12 +17,12 @@ class Leaf extends AbstractNode {
      *
      * @return integer with the node's value.
      */
-    int getValue() {
+    int getValue () {
         return this.value;
     }
 
     @Override
-    AbstractNode extend(String str, int j) {
+    AbstractNode extend (String str, int j) {
         int match = match(str);
         if (match == edgeLength()) {
             if (match == str.length() - 1) {
