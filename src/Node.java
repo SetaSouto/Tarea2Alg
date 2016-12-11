@@ -2,12 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Node extends AbstractNode {
-    private static boolean linkPending = false;
-    private static Node toLink;
+    static boolean linkPending = false;
+    static Node toLink;
 
-    private static void link (Node node) {
+    static void link (Node node) {
         if (linkPending) {
-
+            toLink.addLink(node);
+            linkPending = false;
+        } else {
+            toLink = node;
+            linkPending = true;
         }
     }
 

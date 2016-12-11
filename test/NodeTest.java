@@ -15,6 +15,41 @@ class NodeTest {
         na = new Node("na");
     }
 
+    // Static methos
+
+    @Test
+    void link () {
+        Node.link(ba);
+
+        assertTrue(Node.linkPending);
+        assertEquals(ba, Node.toLink);
+        assertEquals(0, ba.getSuffixLinks().size());
+        assertEquals(0, na.getSuffixLinks().size());
+
+        Node.link(na);
+
+        assertFalse(Node.linkPending);
+        assertEquals(1, ba.getSuffixLinks().size());
+        assertEquals(na, ba.getSuffixLinks().get(0));
+        assertEquals(0, na.getSuffixLinks().size());
+
+        Node.link(na);
+
+        assertTrue(Node.linkPending);
+        assertEquals(na, Node.toLink);
+        assertEquals(1, ba.getSuffixLinks().size());
+        assertEquals(na, ba.getSuffixLinks().get(0));
+        assertEquals(0, na.getSuffixLinks().size());
+
+        Node.link(ba);
+
+        assertFalse(Node.linkPending);
+        assertEquals(1, ba.getSuffixLinks().size());
+        assertEquals(na, ba.getSuffixLinks().get(0));
+        assertEquals(1, na.getSuffixLinks().size());
+        assertEquals(ba, na.getSuffixLinks().get(0));
+    }
+
     // Inherited methods
 
     @Test
