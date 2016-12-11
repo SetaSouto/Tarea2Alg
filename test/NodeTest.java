@@ -69,6 +69,19 @@ class NodeTest {
     // Node methods
 
     @Test
+    void getSuffixLinks () {
+        Node root = new Node("");
+        root.addLink(ba);
+        root.addLink(na);
+        root.addLink(na);
+
+        assertEquals(3, root.getSuffixLinks().size());
+        assertEquals(ba, root.getSuffixLinks().get(0));
+        assertEquals(na, root.getSuffixLinks().get(1));
+        assertEquals(na, root.getSuffixLinks().get(2));
+    }
+
+    @Test
     void getChildren () {
         Node root = new Node("");
         root.addChild(ba);

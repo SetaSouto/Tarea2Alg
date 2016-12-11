@@ -2,7 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Node extends AbstractNode {
+    private static boolean linkPending = false;
+    private static Node toLink;
+
+    private static void link (Node node) {
+        if (linkPending) {
+
+        }
+    }
+
     private List<AbstractNode> children;
+    private List<Node> suffixLinks;
 
     /**
      * Constructor.
@@ -12,6 +22,25 @@ class Node extends AbstractNode {
     public Node (String edge) {
         this.edge = edge;
         this.children = new ArrayList<>();
+        this.suffixLinks = new ArrayList<>();
+    }
+
+    /**
+     * Adds a new suffix link.
+     *
+     * @param link the suffix link destination node.
+     */
+    void addLink (Node link) {
+        this.suffixLinks.add(link);
+    }
+
+    /**
+     * Returns the list of suffix links.
+     *
+     * @return a list of Node objects.
+     */
+    List<Node> getSuffixLinks () {
+        return this.suffixLinks;
     }
 
     /**
