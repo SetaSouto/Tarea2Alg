@@ -81,6 +81,15 @@ class Node extends AbstractNode {
     }
 
     /**
+     * Adds all the received suffix links to the node's suffix link list.
+     *
+     * @param links the new links to be included.
+     */
+    void addLinks (List<Node> links) {
+        this.suffixLinks.addAll(links);
+    }
+
+    /**
      * Returns the list of suffix links.
      *
      * @return a list of Node objects.
@@ -105,6 +114,17 @@ class Node extends AbstractNode {
      */
     List<AbstractNode> getChildren () {
         return this.children;
+    }
+
+    @Override
+    AbstractNode splitEdge(int index, String str, int j) {
+        Node node = new Node(edge.substring(0, index + 1));
+        node.addLinks(this.getSuffixLinks());
+        edge = edge.substring(index + 1);
+        suffixLinks = new ArrayList<>();
+        node.addChild(this);
+        node.addChild(new Leaf(str.substring(index + 1), j));
+        return node;
     }
 
     @Override

@@ -50,14 +50,7 @@ abstract class AbstractNode {
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      * @return the uppermost node of the resulting split.
      */
-    AbstractNode splitEdge (int index, String str, int j) {
-        Node node = new Node(edge.substring(0, index + 1));
-        Node.link(node);
-        edge = edge.substring(index + 1);
-        node.addChild(this);
-        node.addChild(new Leaf(str.substring(index + 1), j));
-        return node;
-    }
+    abstract AbstractNode splitEdge (int index, String str, int j);
 
     /**
      * Extends the SuffixTree with a new substring. Extensions are made with the specified rules.

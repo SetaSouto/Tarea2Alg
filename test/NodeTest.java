@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NodeTest {
@@ -97,26 +100,12 @@ class NodeTest {
         assertEquals(-1, banana.match("canana"));
     }
 
-    @Test
-    void splitEdge () {
-        Node banana = new Node("banana");
-        String extension = "banono";
-
-        assertEquals(2, banana.match(extension));
-
-        Node result = (Node) banana.splitEdge(2, extension, 2);
-
-        assertEquals("ban", result.edge);
-        assertEquals("ana", result.getChildren().get(0).edge);
-        assertEquals("ono", result.getChildren().get(1).edge);
-        assertEquals(0, ((Node) result.getChildren().get(0)).getChildren().size());
-        assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
-    }
-
     // Node methods
 
     @Test
     void getSuffixLinks () {
+        // Links added vía addLink
+
         Node root = new Node("");
         root.addLink(ba);
         root.addLink(na);
@@ -126,6 +115,20 @@ class NodeTest {
         assertEquals(ba, root.getSuffixLinks().get(0));
         assertEquals(na, root.getSuffixLinks().get(1));
         assertEquals(na, root.getSuffixLinks().get(2));
+
+        // Links added via addLinks
+
+        Node newRoot = new Node("");
+        List<Node> links = new ArrayList<>();
+        links.add(ba);
+        links.add(na);
+        links.add(na);
+        newRoot.addLinks(links);
+
+        assertEquals(3, newRoot.getSuffixLinks().size());
+        assertEquals(ba, newRoot.getSuffixLinks().get(0));
+        assertEquals(na, newRoot.getSuffixLinks().get(1));
+        assertEquals(na, newRoot.getSuffixLinks().get(2));
     }
 
     @Test
@@ -142,6 +145,22 @@ class NodeTest {
     }
 
     // Overridden methods
+
+    @Test
+    void splitEdge () {
+        Node banana = new Node("banana");
+        String extension = "banono";
+
+        assertEquals(2, banana.match(extension));
+
+        Node result = (Node) banana.splitEdge(2, extension, 2);
+
+        assertEquals("ban", result.edge);
+        assertEquals("ana", result.getChildren().get(0).edge);
+        assertEquals("ono", result.getChildren().get(1).edge);
+        assertEquals(0, ((Node) result.getChildren().get(0)).getChildren().size());
+        assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
+    }
 
     @Test
     void extend () {
