@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Root {
+class Root {
     private List<AbstractNode> children;
 
-    public Root () {
+    Root() {
         this.children = new ArrayList<>();
     }
 
