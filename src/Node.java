@@ -5,14 +5,56 @@ class Node extends AbstractNode {
     static boolean linkPending = false;
     static Node toLink;
 
+    /**
+     * Sets up the received Node for a suffix link. If there is a Node with a pending link,
+     * the received node corresponds its destination node (property 1).
+     *
+     * @param node a newly created node that needs linking.
+     */
     static void link (Node node) {
         if (linkPending) {
-            toLink.addLink(node);
-            linkPending = false;
+            if (checkLink(node, toLink)) {
+                toLink.addLink(node);
+                linkPending = false;
+            } else {
+                throw new Error("Attempting to create an invalid suffix link between nodes "
+                                    + node.edge + " and " + toLink.edge);
+            }
         } else {
             toLink = node;
             linkPending = true;
         }
+    }
+
+    /**
+     * Checks whether the given nodes should be suffix linked, that is, one's edge has the form a, while
+     * the second has the form xa, where a is a (possibly empty) string and x a character.
+     *
+     * @param node1 the first node being checked.
+     * @param node2 the second node being checked.
+     * @return whether there should be a suffix link between both nodes.
+     */
+    static boolean checkLink (Node node1, Node node2) {
+        String edge1, edge2;
+        if (node1.edgeLength() == 1 + node2.edgeLength()) {
+            edge1 = node1.getEdge();
+            edge2 = node2.getEdge();
+        } else if (node2.edgeLength() == 1 + node1.edgeLength()) {
+            edge1 = node2.getEdge();
+            edge2 = node1.getEdge();
+        } else {
+            return false;
+        }
+
+        boolean cond = true;
+        for (int i = 0; i < edge2.length(); i++) {
+            if (edge1.charAt(i + 1) != edge2.charAt(i)) {
+                cond = false;
+                break;
+            }
+        }
+
+        return cond;
     }
 
     private List<AbstractNode> children;
@@ -27,6 +69,7 @@ class Node extends AbstractNode {
         this.edge = edge;
         this.children = new ArrayList<>();
         this.suffixLinks = new ArrayList<>();
+        //link(this);
     }
 
     /**

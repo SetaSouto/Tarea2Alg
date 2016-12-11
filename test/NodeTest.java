@@ -19,35 +19,47 @@ class NodeTest {
 
     @Test
     void link () {
+        Node a = new Node("a");
+
         Node.link(ba);
 
         assertTrue(Node.linkPending);
         assertEquals(ba, Node.toLink);
         assertEquals(0, ba.getSuffixLinks().size());
-        assertEquals(0, na.getSuffixLinks().size());
+        assertEquals(0, a.getSuffixLinks().size());
 
-        Node.link(na);
+        Node.link(a);
 
         assertFalse(Node.linkPending);
         assertEquals(1, ba.getSuffixLinks().size());
-        assertEquals(na, ba.getSuffixLinks().get(0));
-        assertEquals(0, na.getSuffixLinks().size());
+        assertEquals(a, ba.getSuffixLinks().get(0));
+        assertEquals(0, a.getSuffixLinks().size());
 
-        Node.link(na);
+        Node.link(a);
 
         assertTrue(Node.linkPending);
-        assertEquals(na, Node.toLink);
+        assertEquals(a, Node.toLink);
         assertEquals(1, ba.getSuffixLinks().size());
-        assertEquals(na, ba.getSuffixLinks().get(0));
-        assertEquals(0, na.getSuffixLinks().size());
+        assertEquals(a, ba.getSuffixLinks().get(0));
+        assertEquals(0, a.getSuffixLinks().size());
 
         Node.link(ba);
 
         assertFalse(Node.linkPending);
         assertEquals(1, ba.getSuffixLinks().size());
-        assertEquals(na, ba.getSuffixLinks().get(0));
-        assertEquals(1, na.getSuffixLinks().size());
-        assertEquals(ba, na.getSuffixLinks().get(0));
+        assertEquals(a, ba.getSuffixLinks().get(0));
+        assertEquals(1, a.getSuffixLinks().size());
+        assertEquals(ba, a.getSuffixLinks().get(0));
+    }
+
+    @Test
+    void checkLink () {
+        assertFalse(Node.checkLink(ba, na));
+
+        Node a = new Node("a");
+
+        assertTrue(Node.checkLink(a, ba));
+        assertTrue(Node.checkLink(na, a));
     }
 
     // Inherited methods
