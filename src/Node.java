@@ -35,30 +35,25 @@ class Node extends AbstractNode {
     @Override
     AbstractNode extend (String str, int j) {
         int match = match(str);
-        if (match == edgeLength()) { // the substring started with the complete edge
-            if (match == str.length() - 1) { // path down tree ended, extension must be made
-                for (AbstractNode child : children) {
-                    if (child.firstChar() == str.charAt(str.length() - 1)) {
-                        return this; // if found, no extension is made (rule 3)
-                    }
-                }
-                // if last char of substring not f  ound in any path, a new node must be created
-                addChild(new Leaf(str.substring(str.length() - 1), j));
+        if (match < edgeLength() - 1) {
+            if (match == str.length() - 1) { // str fits completely in edge: implicit extension
                 return this;
-            } else { // descent through tree must continue
-                for (AbstractNode child : children) {
-                    if (child.firstChar() == str.charAt(match)) {
-                        // extend child with the unmatched remainder of the substring
-                        AbstractNode extended = child.extend(str.substring(match, str.length()), j);
-                        children.remove(child);
-                        addChild(extended);
-                        return this;
-                    }
-                }
-                throw new Error("No available path for str " + str + " in node " + edge);
+            } else { // mismatch or str ran out of cars before the edge: edge split extension
+                return splitEdge(match, str, j);
             }
-        } else { // str ran out of chars before edge ended, thus the edge must be split
-            return splitEdge(match, str, j);
+        } else { // the substring started with the complete edge
+            for (AbstractNode child : children) {
+                if (child.firstChar() == str.charAt(match + 1)) {
+                    // extend child with the unmatched remainder of the substring
+                    AbstractNode extended = child.extend(str.substring(match + 1), j);
+                    children.remove(child);
+                    addChild(extended);
+                    return this;
+                }
+            }
+            // if last char of substring not found in any path, a new node must be created
+            addChild(new Leaf(str.substring(match + 1), j));
+            return this;
         }
     }
 }

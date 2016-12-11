@@ -31,7 +31,7 @@ abstract class AbstractNode {
     /**
      * Matches given substring with the node's tag.
      *
-     * @return the index (in the node's tag) where the first mismatch occurred.
+     * @return the index (in the node's tag) where the last match occurs
      */
     int match (String str) {
         int lastMatch = -1;
@@ -39,22 +39,22 @@ abstract class AbstractNode {
             if (i >= str.length() || edge.charAt(i) != str.charAt(i)) break;
             lastMatch++;
         }
-        return lastMatch == -1 ? -1 : ++lastMatch;
+        return lastMatch;
     }
 
     /**
      * Splits the edge on the match index, adding a new path for the extension defined by str.
      *
-     * @param index the position where the second segment of the split edge begins.
+     * @param index the position where the first segment of the split result ends.
      * @param str the substring with which the tree will be extended.
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      * @return the uppermost node of the resulting split.
      */
     AbstractNode splitEdge (int index, String str, int j) {
-        Node node = new Node(edge.substring(0, index));
-        edge = edge.substring(index);
+        Node node = new Node(edge.substring(0, index + 1));
+        edge = edge.substring(index + 1);
         node.addChild(this);
-        node.addChild(new Leaf(str.substring(index), j));
+        node.addChild(new Leaf(str.substring(index + 1), j));
         return node;
     }
 

@@ -24,15 +24,15 @@ class Leaf extends AbstractNode {
     @Override
     AbstractNode extend (String str, int j) {
         int match = match(str);
-        if (match == edgeLength()) {
-            if (match == str.length() - 1) {
-                edge = edge.concat(str.substring(str.length() - 1));
+        if (match < edgeLength() - 1) {
+            if (match == str.length() - 1) { // str fits completely in edge: implicit extension
                 return this;
-            } else {
-                throw new Error("Substring " + str + " does not match at leaf " + edge);
+            } else { // mismatch or str ran out of cars before the edge: edge split extension
+                return splitEdge(match, str, j);
             }
-        } else { // str ran out of chars before edge ended, thus the edge must be split
-            return splitEdge(match, str, j);
+        } else {
+            edge = edge.concat(str.substring(str.length() - 1));
+            return this;
         }
     }
 }

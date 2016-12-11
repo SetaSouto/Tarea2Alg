@@ -44,9 +44,9 @@ class LeafTest {
     void match () {
         Leaf banana = new Leaf("banana", 1);
 
-        assertEquals(1, banana.match("b"));
-        assertEquals(3, banana.match("ban"));
-        assertEquals(6, banana.match("banana"));
+        assertEquals(0, banana.match("b"));
+        assertEquals(2, banana.match("ban"));
+        assertEquals(5, banana.match("banana"));
         assertEquals(-1, banana.match("canana"));
     }
 
@@ -55,9 +55,9 @@ class LeafTest {
         Leaf banana = new Leaf("banana", 1);
         String extension = "banono";
 
-        assertEquals(3, banana.match(extension));
+        assertEquals(2, banana.match(extension));
 
-        Node result = (Node) banana.splitEdge(3, extension, 2);
+        Node result = (Node) banana.splitEdge(2, extension, 2);
 
         assertEquals("ban", result.edge);
         assertEquals("ana", result.getChildren().get(0).edge);
@@ -84,7 +84,7 @@ class LeafTest {
         String extension = "bananas";
         AbstractNode result = banana.extend(extension, 2);
 
-        assertEquals(7, banana.match(extension));
+        assertEquals(6, banana.match(extension));
         assertEquals("bananas", result.edge);
         assertEquals(1, ((Leaf) result).getValue());
 

@@ -27,7 +27,8 @@ class SuffixTree {
         // Create first implicit suffix tree by adding the first character index.
 
         for (int i = 1; i <= str.length(); i++) {    // phase
-            for (int j = 0; j < i; j++) {           // extension
+            for (int j = 0; j < i; j++) {            // extension
+                System.out.println(str.substring(j, i));
                 root.extend(str.substring(j, i), j);
             }
         }
