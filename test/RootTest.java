@@ -6,9 +6,10 @@ class RootTest {
 
     @Test
     void getChildren () {
-        Leaf ba = new Leaf("ba", 1);
-        Leaf na = new Leaf("na", 2);
         Root root = new Root();
+        Leaf ba = new Leaf("ba", 1, root);
+        Leaf na = new Leaf("na", 2, root);
+
         root.addChild(ba);
         root.addChild(na);
         root.addChild(na);

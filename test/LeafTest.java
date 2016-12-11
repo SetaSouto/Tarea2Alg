@@ -11,8 +11,8 @@ class LeafTest {
 
     @BeforeAll
     static void setup () {
-        ba = new Leaf("ba", 0);
-        na = new Leaf("na", 10000000);
+        ba = new Leaf("ba", 0, null);
+        na = new Leaf("na", 10000000, null);
     }
 
     // Inherited methods
@@ -26,7 +26,7 @@ class LeafTest {
 
     @Test
     void edgeLength () {
-        Leaf empty = new Leaf("", 1);
+        Leaf empty = new Leaf("", 1, null);
 
         assertEquals(0, empty.edgeLength());
         assertEquals(2, ba.edgeLength());
@@ -42,7 +42,7 @@ class LeafTest {
 
     @Test
     void match () {
-        Leaf banana = new Leaf("banana", 1);
+        Leaf banana = new Leaf("banana", 1, null);
 
         assertEquals(0, banana.match("b"));
         assertEquals(2, banana.match("ban"));
@@ -52,7 +52,7 @@ class LeafTest {
 
     @Test
     void splitEdge () {
-        Leaf banana = new Leaf("banana", 1);
+        Leaf banana = new Leaf("banana", 1, null);
         String extension = "banono";
 
         assertEquals(2, banana.match(extension));
@@ -80,7 +80,7 @@ class LeafTest {
     @Test
     void extend () {
         // First case: simple edge extension (rule 1).
-        Leaf banana = new Leaf("banana", 1);
+        Leaf banana = new Leaf("banana", 1, null);
         String extension = "bananas";
         AbstractNode result = banana.extend(extension, 2);
 

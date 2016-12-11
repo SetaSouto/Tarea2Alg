@@ -54,13 +54,7 @@ class Root implements INode {
                 }
             }
             // If none available, add a new leaf node
-            if (children.isEmpty()) {
-                AbstractNode completePath = new Leaf(str, j);
-                addChild(completePath);
-                suffixLink = completePath;
-            } else {
-                addChild(new Leaf(str, j));
-            }
+            addChild(new Leaf(str, j, this));
         }
     }
 }

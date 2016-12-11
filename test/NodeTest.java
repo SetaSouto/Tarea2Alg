@@ -14,15 +14,15 @@ class NodeTest {
 
     @BeforeAll
     static void setup () {
-        ba = new Node("ba");
-        na = new Node("na");
+        ba = new Node("ba", null);
+        na = new Node("na", null);
     }
 
     // Static methos
 
     @Test
     void link () {
-        Node a = new Node("a");
+        Node a = new Node("a", null);
 
         Node.link(ba);
 
@@ -51,7 +51,7 @@ class NodeTest {
     void checkLink () {
         assertFalse(Node.checkLink(ba, na));
 
-        Node a = new Node("a");
+        Node a = new Node("a", null);
 
         assertTrue(Node.checkLink(a, ba));
         assertTrue(Node.checkLink(na, a));
@@ -68,7 +68,7 @@ class NodeTest {
 
     @Test
     void edgeLength () {
-        Leaf empty = new Leaf("", 1);
+        Leaf empty = new Leaf("", 1, null);
 
         assertEquals(0, empty.edgeLength());
         assertEquals(2, ba.edgeLength());
@@ -84,7 +84,7 @@ class NodeTest {
 
     @Test
     void match () {
-        Node banana = new Node("banana");
+        Node banana = new Node("banana", null);
 
         assertEquals(0, banana.match("b"));
         assertEquals(2, banana.match("ban"));
@@ -94,7 +94,7 @@ class NodeTest {
 
     @Test
     void splitEdge () {
-        Node banana = new Node("banana");
+        Node banana = new Node("banana", null);
         String extension = "banono";
 
         assertEquals(2, banana.match(extension));
@@ -112,7 +112,10 @@ class NodeTest {
 
     @Test
     void getSuffixLinks () {
-        Node root = new Node("");
+        Node root = new Node("", null);
+        ba = new Node("ba", root);
+        na = new Node("na", root);
+
         root.setLink(ba);
         assertEquals(ba, root.getSuffixLink());
 
@@ -122,7 +125,10 @@ class NodeTest {
 
     @Test
     void getChildren () {
-        Node root = new Node("");
+        Node root = new Node("", null);
+        ba = new Node("ba", root);
+        na = new Node("na", root);
+
         root.addChild(ba);
         root.addChild(na);
         root.addChild(na);
@@ -138,9 +144,9 @@ class NodeTest {
     @Test
     void extend () {
         // First case: implicit extension (rule 3)
-        Node bana = new Node( "bana");
-        bana.addChild(new Leaf("nas", 1));
-        bana.addChild(new Leaf("so", 2));
+        Node bana = new Node( "bana", null);
+        bana.addChild(new Leaf("nas", 1, bana));
+        bana.addChild(new Leaf("so", 2, bana));
         Node result = (Node) bana.extend("banas", 3);
 
         assertEquals(2, result.getChildren().size());

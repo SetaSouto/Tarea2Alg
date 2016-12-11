@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Node extends AbstractNode {
-    static Node toLink = new Node("");
+    static Node toLink = new Node("", null);
 
     /**
      * Sets up the received Node for a suffix link. If there is a Node with a pending link,
@@ -55,9 +55,11 @@ class Node extends AbstractNode {
      * Constructor.
      *
      * @param edge the initial edge value for the node.
+     * @param father the father node.
      */
-    public Node (String edge) {
+    public Node (String edge, INode father) {
         this.edge = edge;
+        this.father = father;
         this.children = new ArrayList<>();
         this.suffixLink = null;
     }
@@ -121,7 +123,7 @@ class Node extends AbstractNode {
                 }
             }
             // if last char of substring not found in any path, a new node must be created
-            addChild(new Leaf(str.substring(match + 1), j));
+            addChild(new Leaf(str.substring(match + 1), j, this));
             return this;
         }
     }

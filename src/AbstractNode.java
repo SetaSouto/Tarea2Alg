@@ -1,4 +1,5 @@
 abstract class AbstractNode implements INode {
+    INode father;
     String edge;
 
     /**
@@ -51,11 +52,14 @@ abstract class AbstractNode implements INode {
      * @return the uppermost node of the resulting split.
      */
     AbstractNode splitEdge (int index, String str, int j) {
-        Node node = new Node(edge.substring(0, index + 1));
+        Node node = new Node(edge.substring(0, index + 1), father);
         Node.link(node);
+
         edge = edge.substring(index + 1);
+        father = node;
+
         node.addChild(this);
-        node.addChild(new Leaf(str.substring(index + 1), j));
+        node.addChild(new Leaf(str.substring(index + 1), j, node));
         return node;
     }
 

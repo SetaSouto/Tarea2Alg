@@ -6,10 +6,12 @@ class Leaf extends AbstractNode {
      *
      * @param edge the initial edge value.
      * @param value initial value of the leaf.
+     * @param father the father node.
      */
-    Leaf(String edge, int value) {
+    Leaf(String edge, int value, INode father) {
         this.value = value;
         this.edge = edge;
+        this.father = father;
     }
 
     /**
