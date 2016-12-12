@@ -37,15 +37,7 @@ class Node extends AbstractNode {
             return false;
         }
 
-        boolean cond = true;
-        for (int i = 0; i < edge2.length(); i++) {
-            if (edge1.charAt(i + 1) != edge2.charAt(i)) {
-                cond = false;
-                break;
-            }
-        }
-
-        return cond;
+        return true;
     }
 
     private List<AbstractNode> children;

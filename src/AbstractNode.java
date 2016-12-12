@@ -35,13 +35,12 @@ abstract class AbstractNode implements INode {
      * @return the index (in the node's tag) where the last match occurs
      */
     int match (String str) {
-        int lastMatch = -1;
-        for (int i = 0; i < edge.length(); i++) {
-            if (i >= str.length() || edge.charAt(i) != str.charAt(i)) break;
-            lastMatch++;
+        int len = str.length() - 1;
+        if (len < edgeLength() - 1) {
+            return str.charAt(len) == edge.charAt(len) ? len : len - 1;
+        } else {
+            return edgeLength() - 1;
         }
-        // if (lastMatch == -1) throw new Error("No match for " + str + " in node " + this.edge);
-        return lastMatch;
     }
 
     /**

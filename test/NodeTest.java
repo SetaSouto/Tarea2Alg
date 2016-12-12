@@ -94,23 +94,22 @@ class NodeTest {
         assertEquals(0, banana.match("b"));
         assertEquals(2, banana.match("ban"));
         assertEquals(5, banana.match("banana"));
-        assertEquals(-1, banana.match("canana"));
     }
 
     @Test
     void splitEdge () {
         root = new Node("", null);
         Node banana = new Node("banana", root);
-        String extension = "banono";
+        String extension = "banano";
 
-        assertEquals(2, banana.match(extension));
+        assertEquals(5, banana.match(extension));
 
         banana.splitEdge(2, extension, 2);
         Node result = (Node) root.getChildren().get(0);
 
         assertEquals("ban", result.edge);
         assertEquals("ana", result.getChildren().get(0).edge);
-        assertEquals("ono", result.getChildren().get(1).edge);
+        assertEquals("ano", result.getChildren().get(1).edge);
         assertEquals(0, result.getChildren().get(0).getChildren().size());
         assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
     }
