@@ -1,9 +1,5 @@
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -160,7 +156,7 @@ class NodeTest {
         root.addChild(bana);
         bana.addChild(new Leaf("nas", 1, bana));
         bana.addChild(new Leaf("so", 2, bana));
-        bana.extend("banas", 3);
+        bana.extend("banas", 3, "");
         Node result = (Node) root.getChildren().get(0);
 
         assertEquals(2, result.getChildren().size());
@@ -170,7 +166,7 @@ class NodeTest {
         assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
 
         // Second case: simple Leaf extension (rule 2)
-        result.extend("banar", 3);
+        result.extend("banar", 3, "");
         result = (Node) root.getChildren().get(0);
 
         assertEquals(3, result.getChildren().size());
@@ -182,7 +178,7 @@ class NodeTest {
         assertEquals(3, ((Leaf) result.getChildren().get(2)).getValue());
 
         // Third case: edge split (rule 2)
-        result.extend("bas", 4);
+        result.extend("bas", 4, "");
         result = (Node) root.getChildren().get(0);
         Node child1 = (Node) result.getChildren().get(0);
         Leaf child2 = (Leaf) result.getChildren().get(1);

@@ -34,14 +34,31 @@ class Root implements INode {
      */
     void extend(String str, int j) {
         if (vNode instanceof Node) { // TODO: change this blasphemy
-            ((Node) vNode).getSuffixLink().extend(str.substring(vString.length()), j);
+            String traversed = str.substring(0, vString.length() - 1);
+            str = str.substring(vString.length() - 1);
+
+            Node link = ((Node) vNode).getSuffixLink();
+            if (link.getSuffixLink() != null) {
+                Root.vString = traversed;
+                Root.vNode = link;
+            } else {
+                vNode = this;
+                vString = "";
+            }
+
+            for (AbstractNode child : link.getChildren()) {
+                if (child.firstChar() == str.charAt(0)) {
+                    child.extend(str, j, traversed);
+                    return;
+                }
+            }
         } else {
             vNode = this;
             vString = "";
             // Try to find a matching path for str
             for (AbstractNode child : children) {
                 if (child.firstChar() == str.charAt(0)) {
-                    child.extend(str, j);
+                    child.extend(str, j,"");
                     return;
                 }
             }

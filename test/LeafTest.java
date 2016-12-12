@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,7 +87,7 @@ class LeafTest {
         Leaf banana = new Leaf("banana", 1, root);
         root.addChild(banana);
         String extension = "bananas";
-        banana.extend(extension, 2);
+        banana.extend(extension, 2, "");
         AbstractNode result = root.getChildren().get(0);
 
         assertEquals(6, banana.match(extension));
@@ -97,7 +96,7 @@ class LeafTest {
 
         // Second case: edge split (rule 2)
         extension = "banas";
-        result.extend(extension, 3);
+        result.extend(extension, 3, "");
         result = root.getChildren().get(0);
         Leaf child1 = (Leaf) result.getChildren().get(0);
         Leaf child2 = (Leaf) result.getChildren().get(1);

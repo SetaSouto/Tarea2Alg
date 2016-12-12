@@ -40,6 +40,7 @@ abstract class AbstractNode implements INode {
             if (i >= str.length() || edge.charAt(i) != str.charAt(i)) break;
             lastMatch++;
         }
+        if (lastMatch == -1) throw new Error("No match for " + str + " in node " + this.edge);
         return lastMatch;
     }
 
@@ -81,9 +82,9 @@ abstract class AbstractNode implements INode {
 
     /**
      * Extends the SuffixTree with a new substring. Extensions are made with the specified rules.
-     *
-     * @param str the substring with which the tree must be extended.
+     *  @param str the substring with which the tree must be extended.
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
+     * @param traversed
      */
-    abstract void extend (String str, int j);
+    abstract void extend(String str, int j, String traversed);
 }

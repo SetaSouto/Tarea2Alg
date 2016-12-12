@@ -89,20 +89,22 @@ class Node extends AbstractNode {
     }
 
     @Override
-    void extend (String str, int j) {
+    void extend(String str, int j, String traversed) {
         int match = match(str);
         if (match < edgeLength() - 1) {
             if (!(match == str.length() - 1)) { // if str fits completely in edge: implicit extension
                 splitEdge(match, str, j); // else mismatch or str ran out of cars before the edge: edge split extension
             }
         } else { // the substring started with the complete edge
-            Root.vString = Root.vString.concat(edge);
-            if (suffixLink == null) Root.vNode = this;
+            if (suffixLink != null) {
+                Root.vString = traversed.concat(edge);
+                Root.vNode = this;
+            }
 
             for (AbstractNode child : children) {
                 if (child.firstChar() == str.charAt(match + 1)) {
                     // extend child with the unmatched remainder of the substring
-                    child.extend(str.substring(match + 1), j);
+                    child.extend(str.substring(match + 1), j, traversed.concat(edge));
                     return;
                 }
             }

@@ -36,7 +36,7 @@ class Leaf extends AbstractNode {
     }
 
     @Override
-    void extend (String str, int j) {
+    void extend(String str, int j, String traversed) {
         int match = match(str);
         if (match < edgeLength() - 1) {
             if (!(match == str.length() - 1)) { // if str fits completely in edge: implicit extension
