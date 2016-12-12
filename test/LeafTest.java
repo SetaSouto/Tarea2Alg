@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,12 +53,15 @@ class LeafTest {
 
     @Test
     void splitEdge () {
-        Leaf banana = new Leaf("banana", 1, null);
+        Node root = new Node("", null);
+        Leaf banana = new Leaf("banana", 1, root);
+        root.addChild(banana);
         String extension = "banono";
 
         assertEquals(2, banana.match(extension));
 
-        Node result = (Node) banana.splitEdge(2, extension, 2);
+        banana.splitEdge(2, extension, 2);
+        Node result = (Node) root.getChildren().get(0);
 
         assertEquals("ban", result.edge);
         assertEquals("ana", result.getChildren().get(0).edge);
@@ -80,9 +84,12 @@ class LeafTest {
     @Test
     void extend () {
         // First case: simple edge extension (rule 1).
-        Leaf banana = new Leaf("banana", 1, null);
+        Node root = new Node("", null);
+        Leaf banana = new Leaf("banana", 1, root);
+        root.addChild(banana);
         String extension = "bananas";
-        AbstractNode result = banana.extend(extension, 2);
+        banana.extend(extension, 2);
+        AbstractNode result = root.getChildren().get(0);
 
         assertEquals(6, banana.match(extension));
         assertEquals("bananas", result.edge);
@@ -90,9 +97,10 @@ class LeafTest {
 
         // Second case: edge split (rule 2)
         extension = "banas";
-        result = result.extend(extension, 3);
-        Leaf child1 = (Leaf) ((Node) result).getChildren().get(0);
-        Leaf child2 = (Leaf) ((Node) result).getChildren().get(1);
+        result.extend(extension, 3);
+        result = root.getChildren().get(0);
+        Leaf child1 = (Leaf) result.getChildren().get(0);
+        Leaf child2 = (Leaf) result.getChildren().get(1);
 
         assertEquals("bana", result.edge);
         assertEquals("nas", child1.edge);

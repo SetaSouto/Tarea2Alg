@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NodeTest {
+    private static Node root;
     private static Node ba;
     private static Node na;
 
@@ -14,15 +16,17 @@ class NodeTest {
 
     @BeforeAll
     static void setup () {
-        ba = new Node("ba", null);
-        na = new Node("na", null);
+        root = new Node("", null); // this line es repeated throughout, as the BeforeEach tag caused errors
+        ba = new Node("ba", root);
+        na = new Node("na", root);
     }
 
     // Static methos
 
     @Test
     void link () {
-        Node a = new Node("a", null);
+        root = new Node("", null);
+        Node a = new Node("a", root);
 
         Node.link(ba);
 
@@ -49,6 +53,7 @@ class NodeTest {
 
     @Test
     void checkLink () {
+        root = new Node("", null);
         assertFalse(Node.checkLink(ba, na));
 
         Node a = new Node("a", null);
@@ -61,6 +66,7 @@ class NodeTest {
 
     @Test
     void firstChar () {
+        root = new Node("", null);
         assertEquals('b', ba.firstChar());
         assertEquals('n', na.firstChar());
         assertNotEquals('b', na.firstChar());
@@ -68,6 +74,7 @@ class NodeTest {
 
     @Test
     void edgeLength () {
+        root = new Node("", null);
         Leaf empty = new Leaf("", 1, null);
 
         assertEquals(0, empty.edgeLength());
@@ -77,6 +84,7 @@ class NodeTest {
 
     @Test
     void getEdge () {
+        root = new Node("", null);
         assertEquals("ba", ba.getEdge());
         assertEquals("na", na.getEdge());
         assertNotEquals("ba", na.getEdge());
@@ -84,6 +92,7 @@ class NodeTest {
 
     @Test
     void match () {
+        root = new Node("", null);
         Node banana = new Node("banana", null);
 
         assertEquals(0, banana.match("b"));
@@ -94,17 +103,19 @@ class NodeTest {
 
     @Test
     void splitEdge () {
-        Node banana = new Node("banana", null);
+        root = new Node("", null);
+        Node banana = new Node("banana", root);
         String extension = "banono";
 
         assertEquals(2, banana.match(extension));
 
-        Node result = (Node) banana.splitEdge(2, extension, 2);
+        banana.splitEdge(2, extension, 2);
+        Node result = (Node) root.getChildren().get(0);
 
         assertEquals("ban", result.edge);
         assertEquals("ana", result.getChildren().get(0).edge);
         assertEquals("ono", result.getChildren().get(1).edge);
-        assertEquals(0, ((Node) result.getChildren().get(0)).getChildren().size());
+        assertEquals(0, result.getChildren().get(0).getChildren().size());
         assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
     }
 
@@ -112,7 +123,7 @@ class NodeTest {
 
     @Test
     void getSuffixLinks () {
-        Node root = new Node("", null);
+        root = new Node("", null);
         ba = new Node("ba", root);
         na = new Node("na", root);
 
@@ -125,7 +136,7 @@ class NodeTest {
 
     @Test
     void getChildren () {
-        Node root = new Node("", null);
+        root = new Node("", null);
         ba = new Node("ba", root);
         na = new Node("na", root);
 
@@ -143,11 +154,14 @@ class NodeTest {
 
     @Test
     void extend () {
+        root = new Node("", null);
         // First case: implicit extension (rule 3)
-        Node bana = new Node( "bana", null);
+        Node bana = new Node( "bana", root);
+        root.addChild(bana);
         bana.addChild(new Leaf("nas", 1, bana));
         bana.addChild(new Leaf("so", 2, bana));
-        Node result = (Node) bana.extend("banas", 3);
+        bana.extend("banas", 3);
+        Node result = (Node) root.getChildren().get(0);
 
         assertEquals(2, result.getChildren().size());
         assertEquals("nas", result.getChildren().get(0).edge);
@@ -156,7 +170,8 @@ class NodeTest {
         assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
 
         // Second case: simple Leaf extension (rule 2)
-        result = (Node) result.extend("banar", 3);
+        result.extend("banar", 3);
+        result = (Node) root.getChildren().get(0);
 
         assertEquals(3, result.getChildren().size());
         assertEquals("nas", result.getChildren().get(0).edge);
@@ -167,7 +182,8 @@ class NodeTest {
         assertEquals(3, ((Leaf) result.getChildren().get(2)).getValue());
 
         // Third case: edge split (rule 2)
-        result = (Node) result.extend("bas", 4);
+        result.extend("bas", 4);
+        result = (Node) root.getChildren().get(0);
         Node child1 = (Node) result.getChildren().get(0);
         Leaf child2 = (Leaf) result.getChildren().get(1);
 

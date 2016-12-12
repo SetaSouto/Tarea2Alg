@@ -16,8 +16,8 @@ class SuffixTreeTest {
 
         assertEquals(3, tree.getRoot().getChildren().size());
         assertEquals("banana", child1.getEdge());
-        assertEquals("nana", child2.getEdge());
-        assertEquals("anana", child3.getEdge());
+        assertEquals("anana", child2.getEdge());
+        assertEquals("nana", child3.getEdge());
     }
 
     @Test

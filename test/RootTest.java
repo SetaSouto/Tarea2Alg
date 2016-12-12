@@ -41,9 +41,9 @@ class RootTest {
         // Third extension: extension happens the first child
         root.extend("ba", 3);
         assertEquals(2, root.getChildren().size());
-        assertEquals("ba", root.getChildren().get(1).edge);
-        assertEquals(1, ((Leaf) root.getChildren().get(1)).getValue());
-        assertEquals("a", root.getChildren().get(0).edge);
-        assertEquals(2, ((Leaf) root.getChildren().get(0)).getValue());
+        assertEquals("a", root.getChildren().get(1).edge);
+        assertEquals(2, ((Leaf) root.getChildren().get(1)).getValue());
+        assertEquals("ba", root.getChildren().get(0).edge);
+        assertEquals(1, ((Leaf) root.getChildren().get(0)).getValue());
     }
 }

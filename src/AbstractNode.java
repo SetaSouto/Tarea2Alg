@@ -49,18 +49,20 @@ abstract class AbstractNode implements INode {
      * @param index the position where the first segment of the split result ends.
      * @param str the substring with which the tree will be extended.
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
-     * @return the uppermost node of the resulting split.
      */
-    AbstractNode splitEdge (int index, String str, int j) {
+    void splitEdge (int index, String str, int j) {
         Node node = new Node(edge.substring(0, index + 1), father);
         Node.link(node);
 
-        edge = edge.substring(index + 1);
-        father = node;
-
         node.addChild(this);
         node.addChild(new Leaf(str.substring(index + 1), j, node));
-        return node;
+
+        // Change reference in father
+        father.getChildren().remove(this);
+        father.getChildren().add(node);
+
+        edge = edge.substring(index + 1);
+        father = node;
     }
 
     /**
@@ -68,7 +70,6 @@ abstract class AbstractNode implements INode {
      *
      * @param str the substring with which the tree must be extended.
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
-     * @return the resulting node after the extension.
      */
-    abstract AbstractNode extend (String str, int j);
+    abstract void extend (String str, int j);
 }

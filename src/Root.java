@@ -21,12 +21,8 @@ class Root implements INode {
         this.children.add(node);
     }
 
-    /**
-     * Returns the list of child nodes.
-     *
-     * @return a list of node objects.
-     */
-    List<AbstractNode> getChildren () {
+    @Override
+    public List<AbstractNode> getChildren () {
         return this.children;
     }
 
@@ -47,9 +43,7 @@ class Root implements INode {
             // Try to find a matching path for str
             for (AbstractNode child : children) {
                 if (child.firstChar() == str.charAt(0)) {
-                    AbstractNode extended = child.extend(str, j);
-                    children.remove(child);
-                    addChild(extended);
+                    child.extend(str, j);
                     return;
                 }
             }
