@@ -40,7 +40,7 @@ abstract class AbstractNode implements INode {
             if (i >= str.length() || edge.charAt(i) != str.charAt(i)) break;
             lastMatch++;
         }
-        if (lastMatch == -1) throw new Error("No match for " + str + " in node " + this.edge);
+        // if (lastMatch == -1) throw new Error("No match for " + str + " in node " + this.edge);
         return lastMatch;
     }
 
