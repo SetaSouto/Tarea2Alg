@@ -48,8 +48,8 @@ abstract class AbstractNode implements INode {
      * Splits the edge on the match index, adding a new path for the extension defined by str.
      *
      * @param index the position where the first segment of the split result ends.
-     * @param str the substring with which the tree will be extended.
-     * @param j extension index. If a new leaf node is created, this value will be assigned to it.
+     * @param str   the substring with which the tree will be extended.
+     * @param j     extension index. If a new leaf node is created, this value will be assigned to it.
      */
     void splitEdge (int index, String str, int j) {
         Node node = new Node(edge.substring(0, index + 1), father);
@@ -82,9 +82,10 @@ abstract class AbstractNode implements INode {
 
     /**
      * Extends the SuffixTree with a new substring. Extensions are made with the specified rules.
-     *  @param str the substring with which the tree must be extended.
-     * @param j extension index. If a new leaf node is created, this value will be assigned to it.
-     * @param traversed
+     * @param str       the substring with which the tree must be extended.
+     * @param j         extension index. If a new leaf node is created, this value will be assigned to it.
+     * @param traversed the portion of the extension string already visited. Used for managing the last visited
+     *                  node with an active suffix link.
      */
-    abstract void extend(String str, int j, String traversed);
+    abstract void extend(String str, int j, String traversed) throws ImplicitExtensionException;
 }

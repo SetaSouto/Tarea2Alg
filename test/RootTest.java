@@ -25,13 +25,21 @@ class RootTest {
         Root root = new Root();
 
         // First extension
-        root.extend("b", 1);
+        try {
+            root.extend("b", 1);
+        } catch (ImplicitExtensionException e) {
+            fail("Unexpected ImplicitExtensionException thrown");
+        }
         assertEquals(1, root.getChildren().size());
         assertEquals("b", root.getChildren().get(0).edge);
         assertEquals(1, ((Leaf) root.getChildren().get(0)).getValue());
 
         // Second extension
-        root.extend("a", 2);
+        try {
+            root.extend("a", 2);
+        } catch (ImplicitExtensionException e) {
+            e.printStackTrace();
+        }
         assertEquals(2, root.getChildren().size());
         assertEquals("b", root.getChildren().get(0).edge);
         assertEquals(1, ((Leaf) root.getChildren().get(0)).getValue());
@@ -39,7 +47,11 @@ class RootTest {
         assertEquals(2, ((Leaf) root.getChildren().get(1)).getValue());
 
         // Third extension: extension happens the first child
-        root.extend("ba", 3);
+        try {
+            root.extend("ba", 3);
+        } catch (ImplicitExtensionException e) {
+            fail("Unexpected ImplicitExtensionException thrown");
+        }
         assertEquals(2, root.getChildren().size());
         assertEquals("a", root.getChildren().get(1).edge);
         assertEquals(2, ((Leaf) root.getChildren().get(1)).getValue());

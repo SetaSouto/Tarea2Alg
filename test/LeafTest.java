@@ -82,21 +82,45 @@ class LeafTest {
 
     @Test
     void extend () {
-        // First case: simple edge extension (rule 1).
         Node root = new Node("", null);
         Leaf banana = new Leaf("banana", 1, root);
         root.addChild(banana);
-        String extension = "bananas";
-        banana.extend(extension, 2, "");
+
+        // First case: implicit extension (rule 3).
+
+        String extension = "banan";
+        try {
+            banana.extend(extension, 2, "");
+            fail("Expected an ImplicitExtensionException to be thrown");
+        } catch (ImplicitExtensionException e) {
+            System.out.println(e.getMessage());
+        }
         AbstractNode result = root.getChildren().get(0);
+
+        assertEquals("banana", result.getEdge());
+
+        // Second case: simple edge extension (rule 1).
+
+        extension = "bananas";
+        try {
+            banana.extend(extension, 3, "");
+        } catch (ImplicitExtensionException e) {
+            fail("Unexpected ImplicitExtensionException thrown");
+        }
+        result = root.getChildren().get(0);
 
         assertEquals(6, banana.match(extension));
         assertEquals("bananas", result.edge);
         assertEquals(1, ((Leaf) result).getValue());
 
-        // Second case: edge split (rule 2)
+        // Third case: edge split (rule 2)
+
         extension = "banas";
-        result.extend(extension, 3, "");
+        try {
+            result.extend(extension, 4, "");
+        } catch (ImplicitExtensionException e) {
+            e.printStackTrace();
+        }
         result = root.getChildren().get(0);
         Leaf child1 = (Leaf) result.getChildren().get(0);
         Leaf child2 = (Leaf) result.getChildren().get(1);
@@ -105,6 +129,6 @@ class LeafTest {
         assertEquals("nas", child1.edge);
         assertEquals("s", child2.edge);
         assertEquals(1, child1.getValue());
-        assertEquals(3, child2.getValue());
+        assertEquals(4, child2.getValue());
     }
 }

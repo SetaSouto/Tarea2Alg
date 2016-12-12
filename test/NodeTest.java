@@ -17,7 +17,7 @@ class NodeTest {
         na = new Node("na", root);
     }
 
-    // Static methos
+    // Static methods
 
     @Test
     void link () {
@@ -151,12 +151,19 @@ class NodeTest {
     @Test
     void extend () {
         root = new Node("", null);
-        // First case: implicit extension (rule 3)
         Node bana = new Node( "bana", root);
-        root.addChild(bana);
         bana.addChild(new Leaf("nas", 1, bana));
         bana.addChild(new Leaf("so", 2, bana));
-        bana.extend("banas", 3, "");
+        root.addChild(bana);
+
+        // First case: implicit extension (rule 3)
+
+        try {
+            bana.extend("banas", 3, "");
+            fail("Expected an ImplicitExtensionException to be thrown");
+        } catch (ImplicitExtensionException e) {
+            System.out.println(e.getMessage());
+        }
         Node result = (Node) root.getChildren().get(0);
 
         assertEquals(2, result.getChildren().size());
@@ -166,7 +173,12 @@ class NodeTest {
         assertEquals(2, ((Leaf) result.getChildren().get(1)).getValue());
 
         // Second case: simple Leaf extension (rule 2)
-        result.extend("banar", 3, "");
+
+        try {
+            result.extend("banar", 3, "");
+        } catch (ImplicitExtensionException e) {
+            fail("Unexpected ImplicitExtensionException thrown");
+        }
         result = (Node) root.getChildren().get(0);
 
         assertEquals(3, result.getChildren().size());
@@ -178,7 +190,12 @@ class NodeTest {
         assertEquals(3, ((Leaf) result.getChildren().get(2)).getValue());
 
         // Third case: edge split (rule 2)
-        result.extend("bas", 4, "");
+
+        try {
+            result.extend("bas", 4, "");
+        } catch (ImplicitExtensionException e) {
+            fail("Unexpected ImplicitExtensionException thrown");
+        }
         result = (Node) root.getChildren().get(0);
         Node child1 = (Node) result.getChildren().get(0);
         Leaf child2 = (Leaf) result.getChildren().get(1);

@@ -32,7 +32,7 @@ class Root implements INode {
      * @param str the substring with which the tree must be extended.
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      */
-    void extend(String str, int j) {
+    void extend(String str, int j) throws ImplicitExtensionException {
         if (vNode instanceof Node) { // TODO: change this blasphemy
             String traversed = str.substring(0, vString.length() - 1);
             str = str.substring(vString.length() - 1);

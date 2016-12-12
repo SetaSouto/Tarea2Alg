@@ -89,13 +89,15 @@ class Node extends AbstractNode {
     }
 
     @Override
-    void extend(String str, int j, String traversed) {
+    void extend(String str, int j, String traversed) throws ImplicitExtensionException {
         int len = str.length() - 1; // checked for skip count
 
         if (len < edgeLength() - 1) {
             int match = match(str);
-            if (!(match == str.length() - 1)) { // if str fits completely in edge: implicit extension
-                splitEdge(match, str, j); // else mismatch or str ran out of cars before the edge: edge split extension
+            if ((match == str.length() - 1)) { // if str fits completely in edge: implicit extension
+                throw new ImplicitExtensionException(traversed + str);
+            } else { // else mismatch or str ran out of cars before the edge: edge split extension
+                splitEdge(match, str, j);
             }
         } else { // the substring started with the complete edge
             int match = edgeLength() - 1;
