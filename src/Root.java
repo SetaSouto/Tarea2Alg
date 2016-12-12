@@ -33,10 +33,8 @@ class Root implements INode {
      * @param j extension index. If a new leaf node is created, this value will be assigned to it.
      */
     void extend(String str, int j) {
-        if (false) { //vNode != this
-            //AbstractNode extended = ((Node) vNode).getSuffixLinks();
-            //children.remove(child);
-            //addChild(extended);
+        if (vNode instanceof Node) { // TODO: change this blasphemy
+            ((Node) vNode).getSuffixLink().extend(str.substring(vString.length()), j);
         } else {
             vNode = this;
             vString = "";

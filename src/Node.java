@@ -64,20 +64,12 @@ class Node extends AbstractNode {
         this.suffixLink = null;
     }
 
-    /**
-     * Set the suffix link.
-     *
-     * @param link the suffix link destination node.
-     */
+    @Override
     void setLink (Node link) {
         this.suffixLink = link;
     }
 
-    /**
-     * Returns the list of suffix links.
-     *
-     * @return a list of Node objects.
-     */
+    @Override
     Node getSuffixLink () {
         return this.suffixLink;
     }

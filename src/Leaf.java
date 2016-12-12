@@ -26,6 +26,16 @@ class Leaf extends AbstractNode {
     }
 
     @Override
+    Node getSuffixLink() {
+        return null;
+    }
+
+    @Override
+    void setLink(Node link) {
+
+    }
+
+    @Override
     void extend (String str, int j) {
         int match = match(str);
         if (match < edgeLength() - 1) {

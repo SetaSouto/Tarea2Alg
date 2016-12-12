@@ -66,6 +66,20 @@ abstract class AbstractNode implements INode {
     }
 
     /**
+     * Returns the list of suffix links.
+     *
+     * @return a list of Node objects.
+     */
+    abstract Node getSuffixLink ();
+
+    /**
+     * Set the suffix link.
+     *
+     * @param link the suffix link destination node.
+     */
+    abstract void setLink (Node link);
+
+    /**
      * Extends the SuffixTree with a new substring. Extensions are made with the specified rules.
      *
      * @param str the substring with which the tree must be extended.
