@@ -26,18 +26,7 @@ class Node extends AbstractNode {
      * @return whether there should be a suffix link between both nodes.
      */
     static boolean checkLink (Node node1, Node node2) {
-        String edge1, edge2;
-        if (node1.edgeLength() == 1 + node2.edgeLength()) {
-            edge1 = node1.getEdge();
-            edge2 = node2.getEdge();
-        } else if (node2.edgeLength() == 1 + node1.edgeLength()) {
-            edge1 = node2.getEdge();
-            edge2 = node1.getEdge();
-        } else {
-            return false;
-        }
-
-        return true;
+        return (node1.edgeLength() == 1 + node2.edgeLength()) || (node2.edgeLength() == 1 + node1.edgeLength());
     }
 
     private List<AbstractNode> children;
